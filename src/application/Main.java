@@ -15,8 +15,10 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			VBox mainMenuRoot = loader.load(new FileInputStream("src/application/MainMenuView.fxml"));
-			Scene mainMenu = new Scene(mainMenuRoot,400,400);
-			primaryStage.setScene(mainMenu);
+			MainMenuViewController controller = (MainMenuViewController) loader.getController();
+			controller.applicationStage = primaryStage;
+			Scene mainMenuView = new Scene(mainMenuRoot,400,400);
+			primaryStage.setScene(mainMenuView);
 			primaryStage.setTitle("Sleep Tracker");
 			primaryStage.show();
 		} catch(Exception e) {
