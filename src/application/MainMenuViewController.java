@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,10 +57,17 @@ public class MainMenuViewController {
 
     @FXML
     void switchSettingsView(ActionEvent event) {
-    	Scene settingsView = new Scene(new Label("Settings"));
-		applicationStage.setScene(settingsView);
-		applicationStage.setTitle("Settings");
-		applicationStage.show();
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			VBox settingsRoot = loader.load(new FileInputStream("src/application/SettingsView.fxml"));
+			Scene settingsView = new Scene(settingsRoot,500,500);
+			applicationStage.setScene(settingsView);
+			applicationStage.setTitle("Settings");
+			applicationStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }
