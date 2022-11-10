@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
+	Stage applicationStage;
 	@Override
 	public void start(Stage primaryStage) {
 		try {

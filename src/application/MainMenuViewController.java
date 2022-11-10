@@ -15,8 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.application.Application;
 
-public class MainMenuViewController {
-	Stage applicationStage;
+public class MainMenuViewController extends Main {
 	
 	
     @FXML
@@ -60,6 +59,8 @@ public class MainMenuViewController {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			VBox settingsRoot = loader.load(new FileInputStream("src/application/SettingsView.fxml"));
+			SettingsController settingsController = (SettingsController) loader.getController();
+			settingsController.applicationStage = applicationStage;
 			Scene settingsView = new Scene(settingsRoot,500,500);
 			applicationStage.setScene(settingsView);
 			applicationStage.setTitle("Settings");
