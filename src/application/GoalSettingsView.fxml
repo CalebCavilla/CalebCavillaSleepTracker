@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="233.0">
          <children>
-            <Button fx:id="goalSettingsBack" mnemonicParsing="false" onAction="#SetMainSettingsScene" prefHeight="25.0" prefWidth="52.0" text="Back">
+            <Button fx:id="goalSettingsBack" mnemonicParsing="false" onAction="#switchSettingsView" prefHeight="25.0" prefWidth="52.0" text="Back">
                <HBox.margin>
                   <Insets right="10.0" top="10" />
                </HBox.margin>
@@ -33,8 +33,11 @@
       <HBox prefHeight="50.0" prefWidth="233.0">
          <children>
             <Label text="Bedtime: ">
+            	<HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
 		    </Label>
-            <TextField fx:id="bedTimeText">
+            <TextField fx:id="targetBedTimeText">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -46,8 +49,12 @@
       </HBox>
       <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Wakeup time:" />
-            <TextField fx:id="wakeUpText">
+            <Label text="Wakeup time:" >
+            	<HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="targetAwakeTimeText">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -56,14 +63,22 @@
       </HBox>
       <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Target ammount of sleep:" />
-            <TextField fx:id="targetSleep">
+            <Label text="Target ammount of sleep:">
+            	<HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="targetSleepText">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </TextField>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" text="Set Goals!" />
+      <Button mnemonicParsing="false" text="Set Goals!">
+      		<VBox.margin>
+                  <Insets left="10.0" />
+            </VBox.margin>
+      </Button>
    </children>
 </VBox>

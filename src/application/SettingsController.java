@@ -20,7 +20,7 @@ public class SettingsController {
 			VBox goalSettingsRoot = loader.load(new FileInputStream("src/application/GoalSettingsView.fxml"));
 			GoalSettingsController goalSettingsController = (GoalSettingsController) loader.getController();
 			goalSettingsController.applicationStage = applicationStage;
-			Scene goalSettingsView = new Scene(goalSettingsRoot,300,300);
+			Scene goalSettingsView = new Scene(goalSettingsRoot,400,300);
 			goalSettingsController.settingsView = settingsView;
 			applicationStage.setScene(goalSettingsView);
 		} catch (IOException e) {
