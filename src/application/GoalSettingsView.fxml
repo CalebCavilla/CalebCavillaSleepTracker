@@ -10,7 +10,7 @@
 
 <VBox prefHeight="151.0" prefWidth="233.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GoalSettingsController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="233.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="233.0">
          <children>
             <Button fx:id="goalSettingsBack" mnemonicParsing="false" onAction="#switchSettingsView" prefHeight="25.0" prefWidth="52.0" text="Back">
                <HBox.margin>

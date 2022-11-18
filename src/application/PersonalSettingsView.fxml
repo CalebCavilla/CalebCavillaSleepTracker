@@ -13,7 +13,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PersonalSettingsController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
          <children>
             <Button alignment="TOP_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchSettingsView" text="Back">
                <HBox.margin>
@@ -27,9 +27,9 @@
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Gender">
+            <Label text="Gender:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></Label>
@@ -50,9 +50,9 @@
             <Insets top="10.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Age: ">
+            <Label text="Age:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></Label>

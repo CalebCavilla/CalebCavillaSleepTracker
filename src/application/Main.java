@@ -19,6 +19,7 @@ public class Main extends Application {
 			MainMenuViewController MainMenucontroller = (MainMenuViewController) loader.getController();
 			MainMenucontroller.applicationStage = primaryStage;
 			Scene mainMenuView = new Scene(mainMenuRoot,400,400);
+			MainMenucontroller.mainMenuView = mainMenuView;
 			primaryStage.setScene(mainMenuView);
 			primaryStage.setTitle("Sleep Tracker");
 			primaryStage.show();

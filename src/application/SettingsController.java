@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class SettingsController {
 	Stage applicationStage;
 	Scene settingsView;
+	Scene mainMenuView;
     @FXML
     void switchGoalSettingView(ActionEvent event) {
 		try {
@@ -28,10 +29,10 @@ public class SettingsController {
 			e.printStackTrace();
 		}
     }
-
-    void switchSettingsView() {
-    	applicationStage.setScene(settingsView);
-    	applicationStage.setTitle("Settings");
+    @FXML
+    void switchMainMenuView() {
+    	applicationStage.setScene(mainMenuView);
+    	applicationStage.setTitle("Main Menu");
     }
     @FXML
     void switchPersonalInformationView(ActionEvent event) {
