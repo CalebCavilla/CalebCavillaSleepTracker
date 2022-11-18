@@ -49,12 +49,12 @@
       </HBox>
       <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Wakeup time:" >
+            <Label text="Wakeup time:">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="targetAwakeTimeText">
+            <TextField fx:id="targetAwakeTimeText">	
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -63,19 +63,24 @@
       </HBox>
       <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Target ammount of sleep:">
+            <Label text="Enter Target ammount of sleep:">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="targetSleepText">
+            <Button mnemonicParsing="false" onAction="#calculateSleepTime" text="update">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
-            </TextField>
+            </Button>
+            <Label fx:id="calculatedSleepLabel" textFill="#19fc00">
+            	<HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" text="Set Goals!">
+      <Button mnemonicParsing="false" onAction="#setGoals" text="Set Goals!">
       		<VBox.margin>
                   <Insets left="10.0" />
             </VBox.margin>
