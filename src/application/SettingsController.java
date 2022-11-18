@@ -17,9 +17,9 @@ public class SettingsController extends MainMenuViewController{
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			VBox goalSettingsRoot = loader.load(new FileInputStream("src/application/GoalSettingsView.fxml"));
-			Scene goalSettingsView = new Scene(goalSettingsRoot,500,500);
+			Scene goalSettingsView = new Scene(goalSettingsRoot,300,300);
 			applicationStage.setScene(goalSettingsView);
-			applicationStage.setTitle("Settings");
+			applicationStage.setTitle("Goal Settings");
 			applicationStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -27,6 +27,10 @@ public class SettingsController extends MainMenuViewController{
 		}
     }
 
+    @FXML
+    void SetMainSettingsScene(ActionEvent event) {
+    	applicationStage.setScene(settingsView);
+    }
     @FXML
     void switchPersonalInformationView(ActionEvent event) {
 
