@@ -20,7 +20,7 @@ public class SettingsController {
 			VBox goalSettingsRoot = loader.load(new FileInputStream("src/application/GoalSettingsView.fxml"));
 			GoalSettingsController goalSettingsController = (GoalSettingsController) loader.getController();
 			goalSettingsController.applicationStage = applicationStage;
-			Scene goalSettingsView = new Scene(goalSettingsRoot,400,300);
+			Scene goalSettingsView = new Scene(goalSettingsRoot,350,300);
 			goalSettingsController.settingsView = settingsView;
 			applicationStage.setScene(goalSettingsView);
 		} catch (IOException e) {
@@ -29,14 +29,24 @@ public class SettingsController {
 		}
     }
 
-    @FXML
-    void SetMainSettingsScene(ActionEvent event) {
+    void switchSettingsView() {
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
     }
     @FXML
     void switchPersonalInformationView(ActionEvent event) {
-
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			VBox personalSettingsRoot = loader.load(new FileInputStream("src/application/PersonalSettingsView.fxml"));
+			PersonalSettingsController personalSettingsController = (PersonalSettingsController) loader.getController();
+			personalSettingsController.applicationStage = applicationStage;
+			Scene personalSettingsView = new Scene(personalSettingsRoot,350,300);
+			personalSettingsController.settingsView = settingsView;
+			applicationStage.setScene(personalSettingsView);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }
