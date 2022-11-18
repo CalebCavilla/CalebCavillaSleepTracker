@@ -7,11 +7,11 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PersonalSettingsController">
+<VBox prefHeight="378.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PersonalSettingsController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
          <children>
@@ -55,11 +55,41 @@
             <Label text="Age:">
                <HBox.margin>
                   <Insets left="10.0" />
-               </HBox.margin></Label>
-            <TextField fx:id="ageText">
+               </HBox.margin>
+            </Label>
+            <Spinner fx:id="ageSpinner">
                <HBox.margin>
                   <Insets left="10.0" />
-               </HBox.margin></TextField>
+               </HBox.margin>
+            </Spinner>
+         </children>
+      </HBox>
+      <HBox prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Label text="Weight (kg) :">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <Spinner fx:id="weightSpinner">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Spinner>
+         </children>
+      </HBox>
+      <HBox prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Label text="Height: (cm)">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <Spinner fx:id="heightSpinner">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Spinner>
          </children>
       </HBox>
       <Button mnemonicParsing="false" onAction="#confirmPersonalInformation" text="Confirm Personal Information">
