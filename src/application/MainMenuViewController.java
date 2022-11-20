@@ -48,6 +48,7 @@ public class MainMenuViewController extends Main {
 			diaryController.applicationStage = applicationStage;
 			Scene diaryView = new Scene(diaryRoot,250,250);
 			diaryController.mainMenuView = mainMenuView;
+			diaryController.diaryView = diaryView;
 			applicationStage.setScene(diaryView);
 			applicationStage.show();
 		} catch (IOException e) {

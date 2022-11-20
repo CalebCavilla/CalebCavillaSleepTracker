@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class DiaryController implements Initializable {
@@ -16,9 +18,23 @@ public class DiaryController implements Initializable {
 	LocalDate selectedDate = LocalDate.now();
 	Stage applicationStage;
 	Scene mainMenuView;
+	Scene diaryView;
 	
     @FXML
     private DatePicker diaryDatePicker;
+    
+    @FXML
+    private Label hoursSoFarLabel;
+    
+    @FXML
+    private Label MinutesSoFarLabel;
+
+    @FXML
+    private Label remainingTimeLabel;
+
+    @FXML
+    private Label timeGoalLabel;
+    
 
     @FXML
     void decreaseDate(ActionEvent event) {
@@ -39,9 +55,7 @@ public class DiaryController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		diaryDatePicker.setValue(selectedDate);
-		
 	}
 
 }
