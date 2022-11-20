@@ -10,26 +10,44 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SettingsController extends MainMenuViewController{
+public class SettingsController {
 	Stage applicationStage;
+	Scene settingsView;
+	Scene mainMenuView;
     @FXML
     void switchGoalSettingView(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			VBox goalSettingsRoot = loader.load(new FileInputStream("src/application/GoalSettingsView.fxml"));
-			Scene goalSettingsView = new Scene(goalSettingsRoot,500,500);
+			GoalSettingsController goalSettingsController = (GoalSettingsController) loader.getController();
+			goalSettingsController.applicationStage = applicationStage;
+			Scene goalSettingsView = new Scene(goalSettingsRoot,350,300);
+			goalSettingsController.settingsView = settingsView;
 			applicationStage.setScene(goalSettingsView);
-			applicationStage.setTitle("Settings");
-			applicationStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
-
+    @FXML
+    void switchMainMenuView() {
+    	applicationStage.setScene(mainMenuView);
+    	applicationStage.setTitle("Main Menu");
+    }
     @FXML
     void switchPersonalInformationView(ActionEvent event) {
-
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			VBox personalSettingsRoot = loader.load(new FileInputStream("src/application/PersonalSettingsView.fxml"));
+			PersonalSettingsController personalSettingsController = (PersonalSettingsController) loader.getController();
+			personalSettingsController.applicationStage = applicationStage;
+			Scene personalSettingsView = new Scene(personalSettingsRoot,350,300);
+			personalSettingsController.settingsView = settingsView;
+			applicationStage.setScene(personalSettingsView);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }

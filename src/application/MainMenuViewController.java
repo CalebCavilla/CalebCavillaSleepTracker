@@ -17,6 +17,7 @@ import javafx.application.Application;
 
 public class MainMenuViewController extends Main {
 	
+	Scene mainMenuView;
 	
     @FXML
     private Button dashBoardButton;
@@ -61,7 +62,9 @@ public class MainMenuViewController extends Main {
 			VBox settingsRoot = loader.load(new FileInputStream("src/application/SettingsView.fxml"));
 			SettingsController settingsController = (SettingsController) loader.getController();
 			settingsController.applicationStage = applicationStage;
-			Scene settingsView = new Scene(settingsRoot,500,500);
+			Scene settingsView = new Scene(settingsRoot,250,250);
+			settingsController.settingsView = settingsView;
+			settingsController.mainMenuView = mainMenuView;
 			applicationStage.setScene(settingsView);
 			applicationStage.setTitle("Settings");
 			applicationStage.show();
