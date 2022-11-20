@@ -41,10 +41,19 @@ public class MainMenuViewController extends Main {
 
     @FXML
     void switchDiaryView(ActionEvent event) {
-    	Scene diaryView = new Scene(new Label("Diary"));
-		applicationStage.setScene(diaryView);
-		applicationStage.setTitle("Diary");
-		applicationStage.show();
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
+			DiaryController diaryController = (DiaryController) loader.getController();
+			diaryController.applicationStage = applicationStage;
+			Scene diaryView = new Scene(diaryRoot,250,250);
+			diaryController.mainMenuView = mainMenuView;
+			applicationStage.setScene(diaryView);
+			applicationStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @FXML

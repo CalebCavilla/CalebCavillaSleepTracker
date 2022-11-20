@@ -50,8 +50,10 @@ public class PersonalSettingsController implements Initializable {
     	weight = weightSpinner.getValue();
     	height = heightSpinner.getValue();
     	
+    	applicationStage.setScene(settingsView);
+    	applicationStage.setTitle("Settings");
     	
-    	System.out.println(age + " " + gender);
+    	System.out.println(age + " " + gender + " "+ weight + " "+ height);
     }
     
 	@Override
