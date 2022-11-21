@@ -14,10 +14,11 @@ import javafx.stage.Stage;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 
-public class PersonalSettingsController extends SettingsController implements Initializable {
+public class PersonalSettingsController implements Initializable {
 
 	Stage applicationStage;
 	Scene settingsView;
+	User user;
 	
 	int age;
 	String gender;
@@ -61,8 +62,6 @@ public class PersonalSettingsController extends SettingsController implements In
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		user.print();
 		
 		
 		// Age spinner setup

@@ -15,13 +15,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			user.setAge(5);
 			FXMLLoader loader = new FXMLLoader();
 			VBox mainMenuRoot = loader.load(new FileInputStream("src/application/MainMenuView.fxml"));
 			MainMenuViewController MainMenucontroller = (MainMenuViewController) loader.getController();
 			MainMenucontroller.applicationStage = primaryStage;
 			Scene mainMenuView = new Scene(mainMenuRoot,400,400);
 			MainMenucontroller.mainMenuView = mainMenuView;
+			MainMenucontroller.user = user;
 			primaryStage.setScene(mainMenuView);
 			primaryStage.setTitle("Sleep Tracker");
 			primaryStage.show();

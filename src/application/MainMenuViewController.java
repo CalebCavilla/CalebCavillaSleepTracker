@@ -18,6 +18,7 @@ import javafx.application.Application;
 public class MainMenuViewController extends Main {
 	
 	Scene mainMenuView;
+	User user;
 	
     @FXML
     private Button dashBoardButton;
@@ -45,6 +46,8 @@ public class MainMenuViewController extends Main {
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
+			diaryController.user = user;
+			diaryController.timeGoalLabel.setText(user.getGoalTotalSleep() + "\n Goal");
 			diaryController.applicationStage = applicationStage;
 			Scene diaryView = new Scene(diaryRoot,600,400);
 			diaryController.mainMenuView = mainMenuView;
@@ -60,8 +63,8 @@ public class MainMenuViewController extends Main {
     
     @FXML
     void switchScheduleView(ActionEvent event) {
-    	Scene scheduleView = new Scene(new Label("Schedule"));
     	user.print();
+    	Scene scheduleView = new Scene(new Label("Schedule"));
 		applicationStage.setScene(scheduleView);
 		applicationStage.setTitle("Schedule");
 		applicationStage.show();
@@ -77,6 +80,7 @@ public class MainMenuViewController extends Main {
 			Scene settingsView = new Scene(settingsRoot,250,250);
 			settingsController.settingsView = settingsView;
 			settingsController.mainMenuView = mainMenuView;
+			settingsController.user = user;
 			applicationStage.setScene(settingsView);
 			applicationStage.setTitle("Settings");
 			applicationStage.show();

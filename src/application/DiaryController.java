@@ -13,12 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class DiaryController implements Initializable {
+public class DiaryController extends MainMenuViewController implements Initializable {
 
 	LocalDate selectedDate = LocalDate.now();
 	Stage applicationStage;
 	Scene mainMenuView;
 	Scene diaryView;
+	User user;
 	
     @FXML
     private DatePicker diaryDatePicker;
@@ -32,8 +33,8 @@ public class DiaryController implements Initializable {
     @FXML
     private Label remainingTimeLabel;
 
-    @FXML
-    private Label timeGoalLabel;
+    @FXML 
+    Label timeGoalLabel;
     
 
     @FXML

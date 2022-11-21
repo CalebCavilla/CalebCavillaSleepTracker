@@ -8,10 +8,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class GoalSettingsController extends SettingsController {
+public class GoalSettingsController {
 
 	Stage applicationStage;
 	Scene settingsView;
+	User user;
 	
 	String targetBedTime;
 	String targetAwakeTime;
@@ -45,10 +46,10 @@ public class GoalSettingsController extends SettingsController {
     
     @FXML
     void setGoals(ActionEvent event) {
-    	
     	user.setGoalBedTime(targetBedTimeText.getText());
     	user.setGoalAwakeTime(targetAwakeTimeText.getText());
     	user.setGoalTotalSleep(calculateSleepTime());
+    	System.out.print(user.getGoalTotalSleep());
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
     }
@@ -145,7 +146,7 @@ public class GoalSettingsController extends SettingsController {
     		}
     	
     	}
-		return awakeTime;
+		return targetSleep;
     }
     	
 

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="298.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DiaryController">
    <children>
@@ -19,17 +20,59 @@
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
-      <HBox alignment="CENTER" prefHeight="123.0" prefWidth="579.0">
+      <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Label fx:id="timeGoalLabel" text="Goal" textAlignment="CENTER" wrapText="true" />
-            <Label text="-" />
-            <Label fx:id="hoursSoFarLabel" text="Hours" />
-            <Label text="-" />
-            <Label fx:id="MinutesSoFarLabel" text="Minutes" />
-            <Label text="=" />
-            <Label fx:id="remainingTimeLabel" text="Remaining" />
+            <Label text="Sleep Remaining">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="579.0">
+               <children>
+                  <Label fx:id="timeGoalLabel" text="Goal" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label text="-">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="hoursSoFarLabel" text="Hours">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <Label text="-">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="MinutesSoFarLabel" text="Minutes">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <Label text="=">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="remainingTimeLabel" text="Remaining" textFill="#0080ff">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
       <Separator prefWidth="200.0" />
       <VBox prefHeight="133.0" prefWidth="579.0">
          <children>
@@ -37,6 +80,9 @@
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Label>
             <HBox prefHeight="66.0" prefWidth="579.0">
                <children>
@@ -66,6 +112,9 @@
                      </HBox.margin>
                   </TextField>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
