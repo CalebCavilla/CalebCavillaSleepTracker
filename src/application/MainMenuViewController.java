@@ -46,7 +46,7 @@ public class MainMenuViewController extends Main {
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
 			diaryController.applicationStage = applicationStage;
-			Scene diaryView = new Scene(diaryRoot,250,250);
+			Scene diaryView = new Scene(diaryRoot,600,400);
 			diaryController.mainMenuView = mainMenuView;
 			diaryController.diaryView = diaryView;
 			applicationStage.setScene(diaryView);
@@ -57,9 +57,11 @@ public class MainMenuViewController extends Main {
 		}
     }
 
+    
     @FXML
     void switchScheduleView(ActionEvent event) {
     	Scene scheduleView = new Scene(new Label("Schedule"));
+    	user.print();
 		applicationStage.setScene(scheduleView);
 		applicationStage.setTitle("Schedule");
 		applicationStage.show();

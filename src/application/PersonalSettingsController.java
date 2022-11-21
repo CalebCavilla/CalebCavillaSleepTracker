@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 
-public class PersonalSettingsController implements Initializable {
+public class PersonalSettingsController extends SettingsController implements Initializable {
 
 	Stage applicationStage;
 	Scene settingsView;
@@ -45,10 +45,13 @@ public class PersonalSettingsController implements Initializable {
     }
     @FXML
     void confirmPersonalInformation(ActionEvent event) {
-    	age = ageSpinner.getValue();
-    	gender = genderChoice.getValue();
-    	weight = weightSpinner.getValue();
-    	height = heightSpinner.getValue();
+    	
+    	user.setGender(genderChoice.getValue());
+    	user.setAge(ageSpinner.getValue());
+    	user.setWeight(weightSpinner.getValue());
+    	user.setHeight(heightSpinner.getValue());
+    	
+    
     	
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
@@ -58,6 +61,9 @@ public class PersonalSettingsController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		user.print();
+		
 		
 		// Age spinner setup
 		SpinnerValueFactory<Integer> ageValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 125, 18);

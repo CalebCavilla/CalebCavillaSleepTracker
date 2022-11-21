@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SettingsController {
+public class SettingsController extends MainMenuViewController{
 	Stage applicationStage;
 	Scene settingsView;
 	Scene mainMenuView;
