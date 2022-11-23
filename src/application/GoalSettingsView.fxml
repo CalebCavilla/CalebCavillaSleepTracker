@@ -68,7 +68,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#calculateSleepTime" text="update">
+            <Button mnemonicParsing="false" onAction="#updateSleepTime" text="update">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

@@ -1,5 +1,6 @@
 package application;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -14,6 +15,9 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.application.Application;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class MainMenuViewController extends Main {
 	
@@ -48,19 +52,25 @@ public class MainMenuViewController extends Main {
 			DiaryController diaryController = (DiaryController) loader.getController();
 			
 			// set the labels for time tracking
-			diaryController.setTimeGoalLabel(user.getGoalTotalSleep());
+			if (user.getGoalTotalSleep() != null) {
+				diaryController.setTimeGoalLabel(user.getGoalTotalSleep());
+				Time timeGoal = new Time(Integer.parseInt(user.getGoalTotalSleep().substring(0,2).trim()), Integer.parseInt(user.getGoalTotalSleep().substring(8,10).trim()), "am");
+				Time timeSoFar = new Time(2,30,"am");
+				diaryController.setRemainingTimeLabel(timeSoFar.difference(timeGoal));
+			}else {
+				diaryController.setTimeGoalLabel("No goal set");
+				diaryController.setRemainingTimeLabel("No goal set");
+			}
 			diaryController.setHoursSoFarLabel("0");
 			diaryController.setMinutesSoFarLabel("0");
 			
-			//*NOT SET UP PROPERLY*
-			diaryController.setRemainingTimeLabel("0");
-			
-			
-			Scene diaryView = new Scene(diaryRoot,600,400);
+			// set instance variables
 			diaryController.setApplicationStage(applicationStage);
 			diaryController.setUser(user);
 			diaryController.setMainMenuView(mainMenuView);
-			diaryController.setDiaryView(diaryView);
+			
+			// create the scene
+			Scene diaryView = new Scene(diaryRoot,700,400);
 			applicationStage.setScene(diaryView);
 			applicationStage.show();
 		} catch (IOException e) {
