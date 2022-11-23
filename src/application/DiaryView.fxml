@@ -32,43 +32,62 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="123.0" prefWidth="579.0">
                <children>
-                  <Label fx:id="timeGoalLabel" text="Goal" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
+                  <VBox alignment="CENTER" prefHeight="89.0" prefWidth="179.0">
+                     <children>
+                        <Label fx:id="timeGoalLabel" alignment="CENTER" prefHeight="30.0" prefWidth="181.0" text="8 hours 0 minutes">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Goal" textAlignment="CENTER" wrapText="true" />
+                     </children>
+                  </VBox>
                   <Label text="-">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></Label>
-                  <Label fx:id="hoursSoFarLabel" text="Hours">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></Label>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="hoursSoFarLabel" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" text="Label">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Hours" />
+                     </children>
+                  </VBox>
                   <Label text="-">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></Label>
-                  <Label fx:id="MinutesSoFarLabel" text="Minutes">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></Label>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="MinutesSoFarLabel" alignment="CENTER" prefHeight="30.0" prefWidth="121.0" text="Label">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Minutes" />
+                     </children>
+                  </VBox>
                   <Label text="=">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></Label>
-                  <Label fx:id="remainingTimeLabel" text="Remaining" textFill="#0080ff">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></Label>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="remainingTimeLabel" alignment="CENTER" prefHeight="30.0" prefWidth="119.0" text="Label">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="Remaining" textFill="#0080ff">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </children>

@@ -15,11 +15,11 @@ import javafx.stage.Stage;
 
 public class DiaryController extends MainMenuViewController implements Initializable {
 
-	LocalDate selectedDate = LocalDate.now();
-	Stage applicationStage;
-	Scene mainMenuView;
-	Scene diaryView;
-	User user;
+	private LocalDate selectedDate = LocalDate.now();
+	private Stage applicationStage;
+	private Scene mainMenuView;
+	private Scene diaryView;
+	private User user;
 	
     @FXML
     private DatePicker diaryDatePicker;
@@ -34,7 +34,7 @@ public class DiaryController extends MainMenuViewController implements Initializ
     private Label remainingTimeLabel;
 
     @FXML 
-    Label timeGoalLabel;
+    private Label timeGoalLabel;
     
 
     @FXML
@@ -58,5 +58,82 @@ public class DiaryController extends MainMenuViewController implements Initializ
 	public void initialize(URL location, ResourceBundle resources) {
 		diaryDatePicker.setValue(selectedDate);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Getting and Setting methods
+	
+	public void setHoursSoFarLabel(String text) {
+		hoursSoFarLabel.setText(text);
+	}
+	
+	public String getHoursSoFarLabel() {
+		return hoursSoFarLabel.getText();
+	}
+	
+	public void setMinutesSoFarLabel(String text) {
+		MinutesSoFarLabel.setText(text);
+	}
+	
+	public String getMinutesSoFarLabel() {
+		return MinutesSoFarLabel.getText();
+	}
+	
+	public void setRemainingTimeLabel(String text) {
+		remainingTimeLabel.setText(text);
+	}
+	
+	public String getRemainingTimeLabel() {
+		return remainingTimeLabel.getText();
+	}
+	
+	public void setTimeGoalLabel(String text) {
+		timeGoalLabel.setText(text);
+	}
+	
+	public String getTimeGoalLabel() {
+		return timeGoalLabel.getText();
+	}
+
+	public Stage getApplicationStage() {
+		return applicationStage;
+	}
+
+	public void setApplicationStage(Stage applicationStage) {
+		this.applicationStage = applicationStage;
+	}
+
+	public Scene getMainMenuView() {
+		return mainMenuView;
+	}
+
+	public void setMainMenuView(Scene mainMenuView) {
+		this.mainMenuView = mainMenuView;
+	}
+
+	public Scene getDiaryView() {
+		return diaryView;
+	}
+
+	public void setDiaryView(Scene diaryView) {
+		this.diaryView = diaryView;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 
 }

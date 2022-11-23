@@ -46,12 +46,21 @@ public class MainMenuViewController extends Main {
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
-			diaryController.user = user;
-			diaryController.timeGoalLabel.setText(user.getGoalTotalSleep() + "\n Goal");
-			diaryController.applicationStage = applicationStage;
+			
+			// set the labels for time tracking
+			diaryController.setTimeGoalLabel(user.getGoalTotalSleep());
+			diaryController.setHoursSoFarLabel("0");
+			diaryController.setMinutesSoFarLabel("0");
+			
+			//*NOT SET UP PROPERLY*
+			diaryController.setRemainingTimeLabel("0");
+			
+			
 			Scene diaryView = new Scene(diaryRoot,600,400);
-			diaryController.mainMenuView = mainMenuView;
-			diaryController.diaryView = diaryView;
+			diaryController.setApplicationStage(applicationStage);
+			diaryController.setUser(user);
+			diaryController.setMainMenuView(mainMenuView);
+			diaryController.setDiaryView(diaryView);
 			applicationStage.setScene(diaryView);
 			applicationStage.show();
 		} catch (IOException e) {
