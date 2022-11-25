@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Time {
 
-	int hours;
-	int minutes;
-	String period;
+	private int hours;
+	private int minutes;
+	private String period;
 	
 	public Time(int hours, int minutes, String period) {
 		this.hours = hours;
@@ -21,7 +21,7 @@ public class Time {
 
 	
 	public String toString() {
-		return hours + " hours " + minutes + " minutes";
+		return hours + " hrs " + minutes + " min";
 	}
 	
 	public Time difference(Time other) {
@@ -103,4 +103,30 @@ public class Time {
     	Time difference = new Time(hoursDifference, minutesDifference);
 		return difference;
     }
+	
+	
+	public int getHours() {
+		return hours;
+	}
+
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+	public int getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	public String getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+
 }

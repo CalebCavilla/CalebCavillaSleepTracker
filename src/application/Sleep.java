@@ -4,7 +4,7 @@ public class Sleep {
 
 	private Time startTime;
 	private Time endTime;
-	private String totalSleep;
+	private Time totalSleep;
 	private String mood;
 	
 	public Sleep(Time startTime, Time endTime, String mood) {
@@ -30,11 +30,11 @@ public class Sleep {
 		this.endTime = endTime;
 	}
 
-	public String getTotalSleep() {
+	public Time getTotalSleep() {
 		return totalSleep;
 	}
 
-	public void setTotalSleep(String totalSleep) {
+	public void setTotalSleep(Time totalSleep) {
 		this.totalSleep = totalSleep;
 	}
 

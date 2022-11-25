@@ -9,7 +9,7 @@ public class Day {
 
 	private Date date;
 	private ArrayList<Sleep> sleepPeriods = new ArrayList<Sleep>();
-	private int totalSleep = 0;
+	private Time totalSleep;
 	
 	public Day(String date) throws ParseException {
 		this.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
@@ -18,10 +18,16 @@ public class Day {
 	
 	public void calculateTotalSleep() {
 		int totalHours = 0;
-		int toalMinutes = 0;
+		int totalMinutes = 0;
 		for (Sleep i : sleepPeriods) {
-			i.getTotalSleep()
+			totalHours += i.getTotalSleep().getHours();
+			totalMinutes += i.getTotalSleep().getMinutes();
+			
+			totalHours += totalMinutes / 60;
+			totalMinutes = totalMinutes % 60;
 		}
+		
+		totalSleep = new Time(totalHours, totalMinutes);
 	}
 	
 	
@@ -41,11 +47,11 @@ public class Day {
 		this.sleepPeriods = sleepPeriods;
 	}
 	
-	public int getTotalSleep() {
+	public Time getTotalSleep() {
 		return totalSleep;
 	}
 
-	public void setTotalSleep(int totalSleep) {
+	public void setTotalSleep(Time totalSleep) {
 		this.totalSleep = totalSleep;
 	}
 

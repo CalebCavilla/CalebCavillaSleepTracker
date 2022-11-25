@@ -50,13 +50,13 @@ public class MainMenuViewController extends Main {
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
-			
+			Time totalSleepGoal = user.getGoalTotalSleep();
 			// set the labels for time tracking
-			if (user.getGoalTotalSleep() != null) {
-				diaryController.setTimeGoalLabel(user.getGoalTotalSleep());
-				Time timeGoal = new Time(Integer.parseInt(user.getGoalTotalSleep().substring(0,2).trim()), Integer.parseInt(user.getGoalTotalSleep().substring(6,7).trim()), "am");
+			if (totalSleepGoal != null) {
+				diaryController.setTimeGoalLabel(totalSleepGoal.toString());
+				Time timeGoal = new Time(totalSleepGoal.getHours(), totalSleepGoal.getMinutes(), "am");
 				Time timeSoFar = new Time(2,30,"am");
-				diaryController.setRemainingTimeLabel(timeSoFar.difference(timeGoal));
+				diaryController.setRemainingTimeLabel(timeSoFar.difference(timeGoal).toString());
 			}else {
 				diaryController.setTimeGoalLabel("No goal set");
 				diaryController.setRemainingTimeLabel("No goal set");
