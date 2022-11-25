@@ -54,7 +54,7 @@ public class MainMenuViewController extends Main {
 			// set the labels for time tracking
 			if (user.getGoalTotalSleep() != null) {
 				diaryController.setTimeGoalLabel(user.getGoalTotalSleep());
-				Time timeGoal = new Time(Integer.parseInt(user.getGoalTotalSleep().substring(0,2).trim()), Integer.parseInt(user.getGoalTotalSleep().substring(8,10).trim()), "am");
+				Time timeGoal = new Time(Integer.parseInt(user.getGoalTotalSleep().substring(0,2).trim()), Integer.parseInt(user.getGoalTotalSleep().substring(6,7).trim()), "am");
 				Time timeSoFar = new Time(2,30,"am");
 				diaryController.setRemainingTimeLabel(timeSoFar.difference(timeGoal));
 			}else {
@@ -70,7 +70,8 @@ public class MainMenuViewController extends Main {
 			diaryController.setMainMenuView(mainMenuView);
 			
 			// create the scene
-			Scene diaryView = new Scene(diaryRoot,700,400);
+			Scene diaryView = new Scene(diaryRoot,550,400);
+			diaryController.setDiaryView(diaryView);
 			applicationStage.setScene(diaryView);
 			applicationStage.show();
 		} catch (IOException e) {

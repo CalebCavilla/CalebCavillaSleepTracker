@@ -1,16 +1,20 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DiaryController extends MainMenuViewController implements Initializable {
@@ -52,6 +56,28 @@ public class DiaryController extends MainMenuViewController implements Initializ
     void setDate(ActionEvent event) {
     	selectedDate = diaryDatePicker.getValue();
     	System.out.println("Hello");
+    }
+    @FXML
+    void switchMainMenuView() {
+    	applicationStage.setScene(mainMenuView);
+    	applicationStage.setTitle("Main Menu");
+    }
+    
+    @FXML 
+    void addSleepPeriod() {
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			VBox addSleepPeriodRoot = loader.load(new FileInputStream("src/application/AddSleepPeriodView.fxml"));
+			AddSleepPeriodController addSleepPeriodController = (AddSleepPeriodController) loader.getController();
+			addSleepPeriodController.setApplicationStage(applicationStage);
+			Scene addSleepPeriodView = new Scene(addSleepPeriodRoot,350,300);
+			addSleepPeriodController.setDiaryView(diaryView);
+			addSleepPeriodController.setUser(user);
+			applicationStage.setScene(addSleepPeriodView);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 	@Override

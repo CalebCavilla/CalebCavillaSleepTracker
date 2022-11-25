@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -55,14 +57,14 @@ public class GoalSettingsController {
     }
     
     @FXML
-    String updateSleepTime() {
+    Time updateSleepTime() {
     	
     	String bedtime = targetBedTimeText.getText();
     	Time bedTime = new Time(Integer.parseInt(bedtime.substring(0, bedtime.indexOf(":"))), Integer.parseInt(bedtime.substring(bedtime.indexOf(":")+1, bedtime.indexOf(":")+3)), bedtime.substring(bedtime.length()-2));
     	String awaketime = targetAwakeTimeText.getText();
     	Time awakeTime = new Time(Integer.parseInt(awaketime.substring(0, awaketime.indexOf(":"))), Integer.parseInt(awaketime.substring(awaketime.indexOf(":")+1, awaketime.indexOf(":")+3)), awaketime.substring(awaketime.length()-2));
-    	String timeDifference = bedTime.difference(awakeTime);
-    	calculatedSleepLabel.setText(timeDifference);
+    	Time timeDifference = bedTime.difference(awakeTime);
+    	calculatedSleepLabel.setText(timeDifference.toString());
     	return timeDifference;
     }
     	

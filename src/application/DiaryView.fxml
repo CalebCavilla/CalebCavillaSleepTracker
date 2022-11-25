@@ -5,22 +5,29 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="298.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DiaryController">
+<VBox prefHeight="298.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DiaryController">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#decreaseDate" text="&lt;" />
+            <Button mnemonicParsing="false" onAction="#switchMainMenuView" text="Back">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#decreaseDate" text="&lt;">
+               <HBox.margin>
+                  <Insets left="140.0" />
+               </HBox.margin></Button>
             <DatePicker fx:id="diaryDatePicker" onAction="#setDate" prefHeight="25.0" prefWidth="132.0" />
             <Button mnemonicParsing="false" onAction="#increaseDate" text="&gt;" />
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="125.0" prefWidth="589.0">
          <children>
             <Label text="Sleep Remaining">
                <font>
@@ -30,16 +37,19 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="579.0">
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="589.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="89.0" prefWidth="179.0">
+                  <VBox alignment="CENTER" prefHeight="114.0" prefWidth="156.0">
                      <children>
                         <Label fx:id="timeGoalLabel" alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="Label">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label text="Goal" textAlignment="CENTER" wrapText="true" />
+                        <Label text="Goal" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="10.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                   <Label text="-">
@@ -50,10 +60,13 @@
                      <children>
                         <Label fx:id="hoursSoFarLabel" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" text="Label">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label text="Hours" />
+                        <Label text="Hours">
+                           <font>
+                              <Font size="10.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                   <Label text="-">
@@ -64,26 +77,29 @@
                      <children>
                         <Label fx:id="MinutesSoFarLabel" alignment="CENTER" prefHeight="30.0" prefWidth="121.0" text="Label">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label text="Minutes" />
+                        <Label text="Minutes">
+                           <font>
+                              <Font size="10.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                   <Label text="=">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></Label>
-                  <VBox alignment="CENTER" prefHeight="89.0" prefWidth="182.0">
+                  <VBox alignment="CENTER" prefHeight="64.0" prefWidth="115.0">
                      <children>
-                        <Label fx:id="remainingTimeLabel" alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="Label">
+                        <Label fx:id="remainingTimeLabel" alignment="CENTER" prefHeight="30.0" prefWidth="121.0" text="Label">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
                         <Label text="Remaining" textFill="#0080ff">
                            <font>
-                              <Font size="11.0" />
+                              <Font size="10.0" />
                            </font>
                         </Label>
                      </children>
@@ -92,51 +108,6 @@
                      </HBox.margin>
                   </VBox>
                </children>
-            </HBox>
-         </children>
-      </VBox>
-      <Separator prefWidth="200.0" />
-      <VBox prefHeight="133.0" prefWidth="579.0">
-         <children>
-            <Label text="Main Sleep ">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="66.0" prefWidth="579.0">
-               <children>
-                  <Label text="Bedtime:">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Label text="-----&gt;">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Wake-up Time:">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
             </HBox>
          </children>
       </VBox>
@@ -145,7 +116,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add Nap" />
+                  <Button mnemonicParsing="false" onAction="#addSleepPeriod" prefHeight="25.0" prefWidth="682.0" text="Add Sleep Period" textFill="#009dff" underline="true" />
                </children>
             </HBox>
          </children>

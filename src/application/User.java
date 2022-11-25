@@ -1,15 +1,19 @@
 package application;
 
+import java.util.ArrayList;
+
 public class User {
 
 	private String goalBedTime;
 	private String goalAwakeTime;
-	private String goalTotalSleep;
+	private Time goalTotalSleep;
 	private String goalMood;
 	private String gender;
 	private int age;
 	private int weight;
 	private int height;
+	
+	private ArrayList<Day> diary = new ArrayList<Day>();
 	
 	
 	
@@ -53,13 +57,13 @@ public class User {
 
 
 
-	public String getGoalTotalSleep() {
+	public Time getGoalTotalSleep() {
 		return goalTotalSleep;
 	}
 
 
 
-	public void setGoalTotalSleep(String goalTotalSleep) {
+	public void setGoalTotalSleep(Time goalTotalSleep) {
 		this.goalTotalSleep = goalTotalSleep;
 	}
 
@@ -122,5 +126,14 @@ public class User {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+
+	public ArrayList<Day> getDiary() {
+		return diary;
+	}
+
+	public void setDiary(ArrayList<Day> diary) {
+		this.diary = diary;
+	}
+	
 
 }

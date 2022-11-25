@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 public class Time {
 
 	int hours;
@@ -11,15 +13,21 @@ public class Time {
 		this.minutes = minutes;
 		this.period = period;
 	}
+	
+	public Time(int hours, int minutes) {
+		this.hours = hours;
+		this.minutes = minutes;
+	}
 
 	
 	public String toString() {
-		return hours + ":" + minutes + " " + period;
+		return hours + " hours " + minutes + " minutes";
 	}
 	
-	public String difference(Time other) {
+	public Time difference(Time other) {
 		
-		String timeDifference = null;
+		int hoursDifference = 0;
+		int minutesDifference = 0;
 		
 		// DefaultVariables for the goal sleep time
     	int startHours = this.hours;
@@ -41,20 +49,24 @@ public class Time {
 			if (startMinutes > endMinutes) {
     			endHours -= 1;
     			endMinutes += 60;
-    			timeDifference = (endHours - startHours) + " hours " + (endMinutes - startMinutes) + " minutes";
+    			hoursDifference = endHours - startHours;
+    			minutesDifference = endMinutes - startMinutes;
 
     		} else if (startMinutes <= endMinutes) {
-    			timeDifference = (endHours - startHours) + " hours " + (endMinutes - startMinutes) + " minutes";
+    			hoursDifference = endHours - startHours;
+    			minutesDifference = endMinutes - startMinutes;
     		}
 			
 		// Going from the afternoon to the morning
     	} else if (this.period.equals("pm") && other.period.equals("am")){
     		startHours += 12;
 			if (startMinutes > 0) {
-				timeDifference = (((23 - startHours) + endHours) + ((60 - startMinutes) + endMinutes) / 60) + " hours " + ((60 - startMinutes) + endMinutes) % 60 + " minutes";
+				hoursDifference = ((23 - startHours) + endHours) + ((60 - startMinutes) + endMinutes) / 60;
+				minutesDifference = ((60 - startMinutes) + endMinutes);
 
     		} else if (startMinutes == 0) {
-    			timeDifference = (24 - startHours) + endHours + " hours " + endMinutes + " minutes";
+        		hoursDifference = (24 - startHours) + endHours;
+    			minutesDifference = endMinutes;
     		}
 		
 		// Going from the afternoon to the afternoon
@@ -62,25 +74,33 @@ public class Time {
     		if (startMinutes > endMinutes) {
     			endHours -= 1;
     			endMinutes += 60;
-    			timeDifference = (endHours - startHours) + " hours " + (endMinutes - startMinutes) + " minutes";
+    			hoursDifference = endHours - startHours;
+    			minutesDifference = endMinutes - startMinutes;
 
     		} else if (startMinutes <= endMinutes) {
-    			timeDifference = (endHours - startHours) + " hours " + (endMinutes - startMinutes) + " minutes";
+    			hoursDifference = endHours - startHours;
+    			minutesDifference = endMinutes - startMinutes;
     		}
     
     	// Going from morning to the afternoon
     	} else if (this.period.equals("am") && other.period.equals("pm")){
     		endHours += 12;
+    		if (startHours == 12) {
+    			startHours = 0;
+    		}
     		if (startMinutes > endMinutes) {
     			endHours -= 1;
     			endMinutes += 60;
-    			timeDifference = (endHours - startHours) + " hours " + (endMinutes - startMinutes) + " minutes";
+    			hoursDifference = endHours - startHours;
+    			minutesDifference = endMinutes - startMinutes;
 
     		} else if (startMinutes <= endMinutes) {
-    			timeDifference = (endHours - startHours) + " hours " + (endMinutes - startMinutes) + " minutes";
+    			hoursDifference = endHours - startHours;
+    			minutesDifference = endMinutes - startMinutes;
     		}
     	
     	}
-		return timeDifference;
+    	Time difference = new Time(hoursDifference, minutesDifference);
+		return difference;
     }
 }
