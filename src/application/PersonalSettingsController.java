@@ -18,6 +18,7 @@ public class PersonalSettingsController implements Initializable {
 
 	Stage applicationStage;
 	Scene settingsView;
+	User user;
 	
 	int age;
 	String gender;
@@ -45,17 +46,23 @@ public class PersonalSettingsController implements Initializable {
     }
     @FXML
     void confirmPersonalInformation(ActionEvent event) {
-    	age = ageSpinner.getValue();
-    	gender = genderChoice.getValue();
-    	weight = weightSpinner.getValue();
-    	height = heightSpinner.getValue();
     	
+    	user.setGender(genderChoice.getValue());
+    	user.setAge(ageSpinner.getValue());
+    	user.setWeight(weightSpinner.getValue());
+    	user.setHeight(heightSpinner.getValue());
     	
-    	System.out.println(age + " " + gender);
+    
+    	
+    	applicationStage.setScene(settingsView);
+    	applicationStage.setTitle("Settings");
+    	
+    	System.out.println(age + " " + gender + " "+ weight + " "+ height);
     }
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		
 		// Age spinner setup
 		SpinnerValueFactory<Integer> ageValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 125, 18);

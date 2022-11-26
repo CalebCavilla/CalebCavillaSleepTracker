@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ public class GoalSettingsController {
 
 	Stage applicationStage;
 	Scene settingsView;
+	User user;
 	
 	String targetBedTime;
 	String targetAwakeTime;
@@ -45,102 +48,24 @@ public class GoalSettingsController {
     
     @FXML
     void setGoals(ActionEvent event) {
-    	
-    	targetBedTime = targetBedTimeText.getText();
-    	targetAwakeTime = targetAwakeTimeText.getText();
-    	
-    	calculateSleepTime();
+    	user.setGoalBedTime(targetBedTimeText.getText());
+    	user.setGoalAwakeTime(targetAwakeTimeText.getText());
+    	user.setGoalTotalSleep(updateSleepTime());
+    	System.out.print(user.getGoalTotalSleep());
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
     }
     
     @FXML
-    void calculateSleepTime() {
+    Time updateSleepTime() {
     	
-    	// DefaultVariables for the goal sleep time
-    	String bedTime = "12:00 am";
-    	int bedTimeHours = 0;
-    	int bedTimeMinutes = 0;
-    	
-    	
-    	// Default Variable for the goal awake time
-    	String awakeTime = "12:00 am";
-    	int awakeTimeHours = 0;
-    	int awakeTimeMinutes = 0;
-    	
-    		
-
-    	
-    	bedTime = targetBedTimeText.getText();
-    	awakeTime = targetAwakeTimeText.getText();
-    	
-    	// update the bedtime as it is inputed
-    	if (bedTime.length() > 0) {
-       		bedTimeHours = Integer.parseInt(bedTime.substring(0, bedTime.indexOf(":")));
-          		bedTimeMinutes = Integer.parseInt(bedTime.substring(bedTime.indexOf(":")+1, bedTime.indexOf(":")+3));
-       	}
-    	
-    	// update the awake time as it is inputed
-    	if (awakeTime.length() > 0) {
-          		awakeTimeHours = Integer.parseInt(awakeTime.substring(0, awakeTime.indexOf(":")));
-          		awakeTimeMinutes = Integer.parseInt(awakeTime.substring(awakeTime.indexOf(":")+1, awakeTime.indexOf(":")+3));
-       	}
-    	
-    	// calculate the users total goal for hours of sleep
-    	
-    	// Going from the morning to the morning
-    	if (bedTime.contains("am") && awakeTime.contains("am")){
-			if (bedTimeMinutes > awakeTimeMinutes) {
-    			awakeTimeHours -= 1;
-    			awakeTimeMinutes += 60;
-    			targetSleep = (awakeTimeHours - bedTimeHours) + " hours " + (awakeTimeMinutes - bedTimeMinutes) + " minutes";
-    			calculatedSleepLabel.setText(targetSleep);
-
-    		} else if (bedTimeMinutes <= awakeTimeMinutes) {
-    			targetSleep = (awakeTimeHours - bedTimeHours) + " hours " + (awakeTimeMinutes - bedTimeMinutes) + " minutes";
-    			calculatedSleepLabel.setText(targetSleep);
-    		}
-			
-		// Going from the afternoon to the morning
-    	} else if (bedTime.contains("pm") && awakeTime.contains("am")){
-    		bedTimeHours += 12;
-			if (bedTimeMinutes > 0) {
-				targetSleep = (((23 - bedTimeHours) + awakeTimeHours) + ((60 - bedTimeMinutes) + awakeTimeMinutes) / 60) + " hours " + ((60 - bedTimeMinutes) + awakeTimeMinutes) % 60 + " minutes";
-				calculatedSleepLabel.setText(targetSleep);
-
-    		} else if (bedTimeMinutes == 0) {
-    			targetSleep = (24 - bedTimeHours) + awakeTimeHours + " hours " + awakeTimeMinutes + " minutes";
-				calculatedSleepLabel.setText(targetSleep);
-    		}
-		
-		// Going from the afternoon to the afternoon
-    	} else if (bedTime.contains("pm") && awakeTime.contains("pm")){
-    		if (bedTimeMinutes > awakeTimeMinutes) {
-    			awakeTimeHours -= 1;
-    			awakeTimeMinutes += 60;
-    			targetSleep = (awakeTimeHours - bedTimeHours) + " hours " + (awakeTimeMinutes - bedTimeMinutes) + " minutes";
-    			calculatedSleepLabel.setText(targetSleep);
-
-    		} else if (bedTimeMinutes <= awakeTimeMinutes) {
-    			targetSleep = (awakeTimeHours - bedTimeHours) + " hours " + (awakeTimeMinutes - bedTimeMinutes) + " minutes";
-    			calculatedSleepLabel.setText(targetSleep);
-    		}
-    
-    	// Going from morning to the afternoon
-    	} else if (bedTime.contains("am") && awakeTime.contains("pm")){
-    		awakeTimeHours += 12;
-    		if (bedTimeMinutes > awakeTimeMinutes) {
-    			awakeTimeHours -= 1;
-    			awakeTimeMinutes += 60;
-    			targetSleep = (awakeTimeHours - bedTimeHours) + " hours " + (awakeTimeMinutes - bedTimeMinutes) + " minutes";
-    			calculatedSleepLabel.setText(targetSleep);
-
-    		} else if (bedTimeMinutes <= awakeTimeMinutes) {
-    			targetSleep = (awakeTimeHours - bedTimeHours) + " hours " + (awakeTimeMinutes - bedTimeMinutes) + " minutes";
-    			calculatedSleepLabel.setText(targetSleep);
-    		}
-    	
-    	}
+    	String bedtime = targetBedTimeText.getText();
+    	Time bedTime = new Time(Integer.parseInt(bedtime.substring(0, bedtime.indexOf(":"))), Integer.parseInt(bedtime.substring(bedtime.indexOf(":")+1, bedtime.indexOf(":")+3)), bedtime.substring(bedtime.length()-2));
+    	String awaketime = targetAwakeTimeText.getText();
+    	Time awakeTime = new Time(Integer.parseInt(awaketime.substring(0, awaketime.indexOf(":"))), Integer.parseInt(awaketime.substring(awaketime.indexOf(":")+1, awaketime.indexOf(":")+3)), awaketime.substring(awaketime.length()-2));
+    	Time timeDifference = bedTime.difference(awakeTime);
+    	calculatedSleepLabel.setText(timeDifference.printSumTime());
+    	return timeDifference;
     }
     	
 

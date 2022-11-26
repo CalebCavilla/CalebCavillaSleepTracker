@@ -10,10 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SettingsController {
+public class SettingsController{
 	Stage applicationStage;
 	Scene settingsView;
 	Scene mainMenuView;
+	User user;
+	
     @FXML
     void switchGoalSettingView(ActionEvent event) {
 		try {
@@ -23,6 +25,7 @@ public class SettingsController {
 			goalSettingsController.applicationStage = applicationStage;
 			Scene goalSettingsView = new Scene(goalSettingsRoot,350,300);
 			goalSettingsController.settingsView = settingsView;
+			goalSettingsController.user = user;
 			applicationStage.setScene(goalSettingsView);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -43,6 +46,7 @@ public class SettingsController {
 			personalSettingsController.applicationStage = applicationStage;
 			Scene personalSettingsView = new Scene(personalSettingsRoot,350,300);
 			personalSettingsController.settingsView = settingsView;
+			personalSettingsController.user = user;
 			applicationStage.setScene(personalSettingsView);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
