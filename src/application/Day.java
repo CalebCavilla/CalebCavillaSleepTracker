@@ -2,17 +2,18 @@ package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Day {
 
-	private Date date;
+	private LocalDate date;
 	private ArrayList<Sleep> sleepPeriods = new ArrayList<Sleep>();
 	private Time totalSleep;
 	
-	public Day(String date) throws ParseException {
-		this.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+	public Day(LocalDate date) throws ParseException {
+		this.setDate(date);
 	}
 	
 	
@@ -31,11 +32,11 @@ public class Day {
 	}
 	
 	
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

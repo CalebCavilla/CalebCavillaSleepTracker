@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="151.0" prefWidth="233.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddSleepPeriodController">
+<VBox prefHeight="228.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddSleepPeriodController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="233.0">
          <children>
@@ -33,6 +33,25 @@
          </VBox.margin>
       </HBox>
       <Separator prefWidth="200.0" />
+      <HBox prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Label text="Sleep Type: ">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></Label>
+            <ChoiceBox fx:id="sleepTypeChoiceBox" prefWidth="150.0">
+            	 <items>
+           			<FXCollections fx:factory="observableArrayList">
+            			<String fx:value="Main Sleep" />
+            			<String fx:value="Nap" />
+            		</FXCollections>
+            	</items>
+            </ChoiceBox>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
       <HBox prefHeight="50.0" prefWidth="233.0">
          <children>
             <Label text="Bedtime: ">
@@ -40,7 +59,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
 		    </Label>
-            <TextField fx:id="targetBedTimeText">
+            <TextField fx:id="bedTimeText">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -57,7 +76,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="targetAwakeTimeText">	
+            <TextField fx:id="awakeTimeText">	
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

@@ -64,7 +64,7 @@ public class GoalSettingsController {
     	String awaketime = targetAwakeTimeText.getText();
     	Time awakeTime = new Time(Integer.parseInt(awaketime.substring(0, awaketime.indexOf(":"))), Integer.parseInt(awaketime.substring(awaketime.indexOf(":")+1, awaketime.indexOf(":")+3)), awaketime.substring(awaketime.length()-2));
     	Time timeDifference = bedTime.difference(awakeTime);
-    	calculatedSleepLabel.setText(timeDifference.toString());
+    	calculatedSleepLabel.setText(timeDifference.printSumTime());
     	return timeDifference;
     }
     	

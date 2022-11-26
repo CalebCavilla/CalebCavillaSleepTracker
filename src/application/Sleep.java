@@ -2,12 +2,14 @@ package application;
 
 public class Sleep {
 
+	private String type;
 	private Time startTime;
 	private Time endTime;
 	private Time totalSleep;
 	private String mood;
 	
-	public Sleep(Time startTime, Time endTime, String mood) {
+	public Sleep(String type, Time startTime, Time endTime, String mood) {
+		this.type = type;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.totalSleep = startTime.difference(endTime);
@@ -44,6 +46,14 @@ public class Sleep {
 
 	public void setMood(String mood) {
 		this.mood = mood;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

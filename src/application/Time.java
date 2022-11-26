@@ -20,8 +20,19 @@ public class Time {
 	}
 
 	
-	public String toString() {
+	public String printSumTime() {
 		return hours + " hrs " + minutes + " min";
+	}
+	
+	public String printTimeFormat() {
+		String strMinutes;
+		if (minutes == 0) {
+			strMinutes = "00";
+		}else {
+			strMinutes = String.valueOf(minutes);
+		}
+		
+		return hours + ":" + strMinutes + " " + period;
 	}
 	
 	public Time difference(Time other) {

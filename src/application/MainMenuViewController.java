@@ -50,19 +50,6 @@ public class MainMenuViewController extends Main {
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
-			Time totalSleepGoal = user.getGoalTotalSleep();
-			// set the labels for time tracking
-			if (totalSleepGoal != null) {
-				diaryController.setTimeGoalLabel(totalSleepGoal.toString());
-				Time timeGoal = new Time(totalSleepGoal.getHours(), totalSleepGoal.getMinutes(), "am");
-				Time timeSoFar = new Time(2,30,"am");
-				diaryController.setRemainingTimeLabel(timeSoFar.difference(timeGoal).toString());
-			}else {
-				diaryController.setTimeGoalLabel("No goal set");
-				diaryController.setRemainingTimeLabel("No goal set");
-			}
-			diaryController.setHoursSoFarLabel("0");
-			diaryController.setMinutesSoFarLabel("0");
 			
 			// set instance variables
 			diaryController.setApplicationStage(applicationStage);
@@ -72,6 +59,7 @@ public class MainMenuViewController extends Main {
 			// create the scene
 			Scene diaryView = new Scene(diaryRoot,550,400);
 			diaryController.setDiaryView(diaryView);
+			diaryController.updateView();
 			applicationStage.setScene(diaryView);
 			applicationStage.show();
 		} catch (IOException e) {
@@ -83,7 +71,9 @@ public class MainMenuViewController extends Main {
     
     @FXML
     void switchScheduleView(ActionEvent event) {
-    	user.print();
+    	System.out.println(user.getDiary());
+    	System.out.println(user.getDiary().get(0).getSleepPeriods());
+    	System.out.println(user.getDiary().get(1).getSleepPeriods());
     	Scene scheduleView = new Scene(new Label("Schedule"));
 		applicationStage.setScene(scheduleView);
 		applicationStage.setTitle("Schedule");
