@@ -70,7 +70,9 @@ public class Time {
 			
 		// Going from the afternoon to the morning
     	} else if (this.period.equals("pm") && other.period.equals("am")){
-    		startHours += 12;
+    		if (startHours != 12) {
+    			startHours += 12;
+    		}
 			if (startMinutes > 0) {
 				hoursDifference = ((23 - startHours) + endHours) + ((60 - startMinutes) + endMinutes) / 60;
 				minutesDifference = ((60 - startMinutes) + endMinutes);

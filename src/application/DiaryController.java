@@ -67,7 +67,6 @@ public class DiaryController extends MainMenuViewController implements Initializ
     @FXML
     void setDate(ActionEvent event) {
     	selectedDate = diaryDatePicker.getValue();
-    	System.out.println("Hello");
     	this.updateView();
     }
     @FXML
@@ -96,7 +95,6 @@ public class DiaryController extends MainMenuViewController implements Initializ
     }
     
     public void updateView() {
-    	System.out.println("Hello world!");
     	
     	sleepPeriodVbox.getChildren().clear();
     	hoursSoFarLabel.setText("0");
@@ -158,14 +156,6 @@ public class DiaryController extends MainMenuViewController implements Initializ
 		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

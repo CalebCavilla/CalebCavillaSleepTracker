@@ -63,7 +63,7 @@
       </HBox>
       <HBox prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label text="Enter Target ammount of sleep:">
+            <Label text="Target ammount of sleep:">
             	<HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
