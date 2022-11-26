@@ -10,12 +10,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddSleepPeriodController {
+public class AddSleepPeriodController extends DiaryController {
 
-	private Stage applicationStage;
-	private Scene diaryView;
-	private User user;
-	private LocalDate givenDate;
 	DiaryController diaryController;
 	
     @FXML
@@ -40,13 +36,13 @@ public class AddSleepPeriodController {
     	Sleep sleepPeriod = new Sleep(sleepTypeChoiceBox.getValue(),bedTime, awakeTime, moodChoiceBox.getValue());
     	
     	for (Day i : user.getDiary()) {
-    		if (i.getDate().equals(givenDate)){
+    		if (i.getDate().equals(selectedDate)){
     			i.getSleepPeriods().add(sleepPeriod);
     			repeatDayFlag = 1;
     		}
     	}
     	if (repeatDayFlag == 0) {
-    		Day day = new Day(givenDate);
+    		Day day = new Day(selectedDate);
 			day.getSleepPeriods().add(sleepPeriod);
 			user.getDiary().add(day);
     	}
@@ -62,37 +58,5 @@ public class AddSleepPeriodController {
     	applicationStage.setScene(diaryView);;
     	applicationStage.setTitle("Diary");
     }
-
-	public Stage getApplicationStage() {
-		return applicationStage;
-	}
-
-	public void setApplicationStage(Stage applicationStage) {
-		this.applicationStage = applicationStage;
-	}
-
-	public Scene getDiaryView() {
-		return diaryView;
-	}
-
-	public void setDiaryView(Scene diaryView) {
-		this.diaryView = diaryView;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public LocalDate getGivenDate() {
-		return givenDate;
-	}
-
-	public void setGivenDate(LocalDate givenDate) {
-		this.givenDate = givenDate;
-	}
 
 }

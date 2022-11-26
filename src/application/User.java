@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class User {
 
-	private String goalBedTime;
-	private String goalAwakeTime;
+	private Time goalBedTime;
+	private Time goalAwakeTime;
 	private Time goalTotalSleep;
 	private String goalMood;
 	private String gender;
@@ -33,25 +33,25 @@ public class User {
 	}
 
 
-	public String getGoalBedTime() {
+	public Time getGoalBedTime() {
 		return goalBedTime;
 	}
 
 
 
-	public void setGoalBedTime(String goalBedTime) {
+	public void setGoalBedTime(Time goalBedTime) {
 		this.goalBedTime = goalBedTime;
 	}
 
 
 
-	public String getGoalAwakeTime() {
+	public Time getGoalAwakeTime() {
 		return goalAwakeTime;
 	}
 
 
 
-	public void setGoalAwakeTime(String goalAwakeTime) {
+	public void setGoalAwakeTime(Time goalAwakeTime) {
 		this.goalAwakeTime = goalAwakeTime;
 	}
 
