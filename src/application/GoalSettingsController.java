@@ -10,15 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class GoalSettingsController {
-
-	Stage applicationStage;
-	Scene settingsView;
-	User user;
-	
-	String targetBedTime;
-	String targetAwakeTime;
-	String targetSleep;
+public class GoalSettingsController extends SettingsController{
 	
 	boolean haveGoalsBeenSet = false;
 	
@@ -48,10 +40,7 @@ public class GoalSettingsController {
     
     @FXML
     void setGoals(ActionEvent event) {
-    	user.setGoalBedTime(targetBedTimeText.getText());
-    	user.setGoalAwakeTime(targetAwakeTimeText.getText());
     	user.setGoalTotalSleep(updateSleepTime());
-    	System.out.print(user.getGoalTotalSleep());
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
     }
@@ -61,10 +50,12 @@ public class GoalSettingsController {
     	
     	String bedtime = targetBedTimeText.getText();
     	Time bedTime = new Time(Integer.parseInt(bedtime.substring(0, bedtime.indexOf(":"))), Integer.parseInt(bedtime.substring(bedtime.indexOf(":")+1, bedtime.indexOf(":")+3)), bedtime.substring(bedtime.length()-2));
+    	user.setGoalBedTime(bedTime);
     	String awaketime = targetAwakeTimeText.getText();
     	Time awakeTime = new Time(Integer.parseInt(awaketime.substring(0, awaketime.indexOf(":"))), Integer.parseInt(awaketime.substring(awaketime.indexOf(":")+1, awaketime.indexOf(":")+3)), awaketime.substring(awaketime.length()-2));
+    	user.setGoalAwakeTime(awakeTime);
     	Time timeDifference = bedTime.difference(awakeTime);
-    	calculatedSleepLabel.setText(timeDifference.printSumTime());
+    	calculatedSleepLabel.setText(timeDifference.printDifferenceFormat());
     	return timeDifference;
     }
     	

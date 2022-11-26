@@ -20,7 +20,7 @@ public class Time {
 	}
 
 	
-	public String printSumTime() {
+	public String printDifferenceFormat() {
 		return hours + " hrs " + minutes + " min";
 	}
 	

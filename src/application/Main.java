@@ -10,18 +10,20 @@ import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
+	Scene mainMenuView;
 	Stage applicationStage;
 	User user = new User();
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			System.out.println(user);
 			FXMLLoader loader = new FXMLLoader();
 			VBox mainMenuRoot = loader.load(new FileInputStream("src/application/MainMenuView.fxml"));
 			MainMenuViewController MainMenucontroller = (MainMenuViewController) loader.getController();
 			MainMenucontroller.applicationStage = primaryStage;
-			Scene mainMenuView = new Scene(mainMenuRoot,400,400);
-			MainMenucontroller.mainMenuView = mainMenuView;
 			MainMenucontroller.user = user;
+			mainMenuView = new Scene(mainMenuRoot,400,400);
+			MainMenucontroller.mainMenuView = mainMenuView;
 			primaryStage.setScene(mainMenuView);
 			primaryStage.setTitle("Sleep Tracker");
 			primaryStage.show();

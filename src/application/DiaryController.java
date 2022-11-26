@@ -24,13 +24,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class DiaryController extends MainMenuViewController implements Initializable {
+public class DiaryController extends MainMenuViewController {
 
-	private LocalDate selectedDate = LocalDate.now();
-	private Stage applicationStage;
-	private Scene mainMenuView;
-	private Scene diaryView;
-	private User user;
+	protected LocalDate selectedDate = LocalDate.now();
 	
     @FXML
     private DatePicker diaryDatePicker;
@@ -81,11 +77,11 @@ public class DiaryController extends MainMenuViewController implements Initializ
 			FXMLLoader loader = new FXMLLoader();
 			VBox addSleepPeriodRoot = loader.load(new FileInputStream("src/application/AddSleepPeriodView.fxml"));
 			AddSleepPeriodController addSleepPeriodController = (AddSleepPeriodController) loader.getController();
-			addSleepPeriodController.setApplicationStage(applicationStage);
+			addSleepPeriodController.applicationStage = applicationStage;
 			Scene addSleepPeriodView = new Scene(addSleepPeriodRoot,350,300);
-			addSleepPeriodController.setDiaryView(diaryView);
-			addSleepPeriodController.setUser(user);
-			addSleepPeriodController.setGivenDate(diaryDatePicker.getValue());
+			addSleepPeriodController.diaryView = diaryView;
+			addSleepPeriodController.user = user;
+			addSleepPeriodController.selectedDate = selectedDate;
 			addSleepPeriodController.diaryController = this;
 			applicationStage.setScene(addSleepPeriodView);
 		} catch (IOException e) {
@@ -96,12 +92,13 @@ public class DiaryController extends MainMenuViewController implements Initializ
     
     public void updateView() {
     	
+    	diaryDatePicker.setValue(selectedDate);
     	sleepPeriodVbox.getChildren().clear();
     	hoursSoFarLabel.setText("0");
 		MinutesSoFarLabel.setText("0");
 		if (user.getGoalTotalSleep() != null) {
-			timeGoalLabel.setText(user.getGoalTotalSleep().printSumTime());
-			remainingTimeLabel.setText(user.getGoalTotalSleep().printSumTime());
+			timeGoalLabel.setText(user.getGoalTotalSleep().printDifferenceFormat());
+			remainingTimeLabel.setText(user.getGoalTotalSleep().printDifferenceFormat());
 		}else {
 			timeGoalLabel.setText("No Goal Set");
 			remainingTimeLabel.setText("No Goal Set");
@@ -120,7 +117,7 @@ public class DiaryController extends MainMenuViewController implements Initializ
 					Time sleepSoFar = new Time(i.getTotalSleep().getHours(), i.getTotalSleep().getMinutes(), "am");
 					Time sleepGoal = new Time(user.getGoalTotalSleep().getHours(), user.getGoalTotalSleep().getMinutes(), "am");
 					
-					remainingTimeLabel.setText((sleepSoFar.difference(sleepGoal).printSumTime()));
+					remainingTimeLabel.setText((sleepSoFar.difference(sleepGoal).printDifferenceFormat()));
 				}
 				// Sleep Periods Code
 				Label sleepPeriodsTitle = new Label("Sleep Periods");
@@ -136,7 +133,7 @@ public class DiaryController extends MainMenuViewController implements Initializ
 					sleepInfoHbox.setPadding(new Insets(0,0,10,0));
 					Label sleepTimes = new Label("Sleep Time: " + j.getStartTime().printTimeFormat() + " -- " + j.getEndTime().printTimeFormat());
 					sleepTimes.setPadding(new Insets(0,0,0,10));
-					Label sleepDuration = new Label("Duration: " + j.getTotalSleep().printSumTime());
+					Label sleepDuration = new Label("Duration: " + j.getTotalSleep().printDifferenceFormat());
 					sleepDuration.setPadding(new Insets(0,0,0,10));
 					Label mood = new Label("Mood: " + j.getMood());
 					mood.setPadding(new Insets(0,0,0,10));
@@ -148,82 +145,6 @@ public class DiaryController extends MainMenuViewController implements Initializ
 			}
 		}
     }
-    
-    
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		diaryDatePicker.setValue(selectedDate);
-		
-		
-	}
-	
-	
-	
-	// Getting and Setting methods
-	
-	public void setHoursSoFarLabel(String text) {
-		hoursSoFarLabel.setText(text);
-	}
-	
-	public String getHoursSoFarLabel() {
-		return hoursSoFarLabel.getText();
-	}
-	
-	public void setMinutesSoFarLabel(String text) {
-		MinutesSoFarLabel.setText(text);
-	}
-	
-	public String getMinutesSoFarLabel() {
-		return MinutesSoFarLabel.getText();
-	}
-	
-	public void setRemainingTimeLabel(String text) {
-		remainingTimeLabel.setText(text);
-	}
-	
-	public String getRemainingTimeLabel() {
-		return remainingTimeLabel.getText();
-	}
-	
-	public void setTimeGoalLabel(String text) {
-		timeGoalLabel.setText(text);
-	}
-	
-	public String getTimeGoalLabel() {
-		return timeGoalLabel.getText();
-	}
-
-	public Stage getApplicationStage() {
-		return applicationStage;
-	}
-
-	public void setApplicationStage(Stage applicationStage) {
-		this.applicationStage = applicationStage;
-	}
-
-	public Scene getMainMenuView() {
-		return mainMenuView;
-	}
-
-	public void setMainMenuView(Scene mainMenuView) {
-		this.mainMenuView = mainMenuView;
-	}
-
-	public Scene getDiaryView() {
-		return diaryView;
-	}
-
-	public void setDiaryView(Scene diaryView) {
-		this.diaryView = diaryView;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
 
 }

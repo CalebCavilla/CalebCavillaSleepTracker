@@ -21,8 +21,10 @@ import java.util.Date;
 
 public class MainMenuViewController extends Main {
 	
-	Scene mainMenuView;
-	User user;
+	Scene settingsView;
+	Scene diaryView;
+	Scene dashboardView;
+	Scene scheduleView;
 	
     @FXML
     private Button dashBoardButton;
@@ -38,7 +40,7 @@ public class MainMenuViewController extends Main {
 
     @FXML
     void switchDashboardView(ActionEvent event) {
-		Scene dashboardView = new Scene(new Label("Dashboard"));
+		dashboardView = new Scene(new Label("Dashboard"));
 		applicationStage.setScene(dashboardView);
 		applicationStage.setTitle("Dashboard");
 		applicationStage.show();
@@ -47,18 +49,20 @@ public class MainMenuViewController extends Main {
     @FXML
     void switchDiaryView(ActionEvent event) {
     	try {
+    		System.out.println("Hello world");
+    		System.out.println(user.getAge());
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
 			
 			// set instance variables
-			diaryController.setApplicationStage(applicationStage);
-			diaryController.setUser(user);
-			diaryController.setMainMenuView(mainMenuView);
+			diaryController.applicationStage = applicationStage;
+			diaryController.mainMenuView = mainMenuView;
+			diaryController.user = user;
 			
 			// create the scene
-			Scene diaryView = new Scene(diaryRoot,550,400);
-			diaryController.setDiaryView(diaryView);
+			diaryView = new Scene(diaryRoot,550,400);
+			diaryController.diaryView = diaryView;
 			diaryController.updateView();
 			applicationStage.setScene(diaryView);
 			applicationStage.show();
@@ -74,7 +78,7 @@ public class MainMenuViewController extends Main {
     	System.out.println(user.getDiary());
     	System.out.println(user.getDiary().get(0).getSleepPeriods());
     	System.out.println(user.getDiary().get(1).getSleepPeriods());
-    	Scene scheduleView = new Scene(new Label("Schedule"));
+    	scheduleView = new Scene(new Label("Schedule"));
 		applicationStage.setScene(scheduleView);
 		applicationStage.setTitle("Schedule");
 		applicationStage.show();
@@ -83,11 +87,12 @@ public class MainMenuViewController extends Main {
     @FXML
     void switchSettingsView(ActionEvent event) {
 		try {
+			System.out.println(user);
 			FXMLLoader loader = new FXMLLoader();
 			VBox settingsRoot = loader.load(new FileInputStream("src/application/SettingsView.fxml"));
 			SettingsController settingsController = (SettingsController) loader.getController();
 			settingsController.applicationStage = applicationStage;
-			Scene settingsView = new Scene(settingsRoot,250,250);
+			settingsView = new Scene(settingsRoot,250,250);
 			settingsController.settingsView = settingsView;
 			settingsController.mainMenuView = mainMenuView;
 			settingsController.user = user;
