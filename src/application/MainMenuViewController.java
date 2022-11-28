@@ -84,7 +84,7 @@ public class MainMenuViewController extends Main {
 			BorderPane scheduleRoot = loader.load(new FileInputStream("src/application/ScheduleView.fxml"));
 			ScheduleController scheduleController = (ScheduleController) loader.getController();
 			scheduleController.applicationStage = applicationStage;
-			scheduleView = new Scene(scheduleRoot,750,750);
+			scheduleView = new Scene(scheduleRoot,1100,750);
 			
 			
 			scheduleController.settingsView = settingsView;
@@ -92,6 +92,7 @@ public class MainMenuViewController extends Main {
 			scheduleController.user = user;
 			applicationStage.setScene(scheduleView);
 			applicationStage.setTitle("Schedule");
+			scheduleController.update();
 			applicationStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
