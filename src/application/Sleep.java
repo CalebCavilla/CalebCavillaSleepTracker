@@ -5,14 +5,14 @@ public class Sleep {
 	private String type;
 	private Time startTime;
 	private Time endTime;
-	private Time totalSleep;
+	private Time duration;
 	private String mood;
 	
 	public Sleep(String type, Time startTime, Time endTime, String mood) {
 		this.type = type;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.totalSleep = startTime.difference(endTime);
+		this.duration = startTime.difference(endTime);
 		this.mood = mood;
 	}
 	
@@ -32,12 +32,12 @@ public class Sleep {
 		this.endTime = endTime;
 	}
 
-	public Time getTotalSleep() {
-		return totalSleep;
+	public Time getDuration() {
+		return duration;
 	}
 
-	public void setTotalSleep(Time totalSleep) {
-		this.totalSleep = totalSleep;
+	public void setDuration(Time duration) {
+		this.duration = duration;
 	}
 
 	public String getMood() {

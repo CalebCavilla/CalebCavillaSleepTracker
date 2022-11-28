@@ -133,7 +133,7 @@ public class DiaryController extends MainMenuViewController {
 					sleepInfoHbox.setPadding(new Insets(0,0,10,0));
 					Label sleepTimes = new Label("Sleep Time: " + j.getStartTime().printTimeFormat() + " -- " + j.getEndTime().printTimeFormat());
 					sleepTimes.setPadding(new Insets(0,0,0,10));
-					Label sleepDuration = new Label("Duration: " + j.getTotalSleep().printDifferenceFormat());
+					Label sleepDuration = new Label("Duration: " + j.getDuration().printDifferenceFormat());
 					sleepDuration.setPadding(new Insets(0,0,0,10));
 					Label mood = new Label("Mood: " + j.getMood());
 					mood.setPadding(new Insets(0,0,0,10));

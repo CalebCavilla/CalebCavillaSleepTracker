@@ -21,8 +21,8 @@ public class Day {
 		int totalHours = 0;
 		int totalMinutes = 0;
 		for (Sleep i : sleepPeriods) {
-			totalHours += i.getTotalSleep().getHours();
-			totalMinutes += i.getTotalSleep().getMinutes();
+			totalHours += i.getDuration().getHours();
+			totalMinutes += i.getDuration().getMinutes();
 			
 			totalHours += totalMinutes / 60;
 			totalMinutes = totalMinutes % 60;
@@ -44,9 +44,6 @@ public class Day {
 		return sleepPeriods;
 	}
 
-	public void setSleepPeriods(ArrayList<Sleep> sleepPeriods) {
-		this.sleepPeriods = sleepPeriods;
-	}
 	
 	public Time getTotalSleep() {
 		return totalSleep;

@@ -130,10 +130,6 @@ public class User {
 	public ArrayList<Day> getDiary() {
 		return diary;
 	}
-
-	public void setDiary(ArrayList<Day> diary) {
-		this.diary = diary;
-	}
 	
 
 }
