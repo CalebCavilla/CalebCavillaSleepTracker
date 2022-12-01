@@ -57,7 +57,7 @@ public class ScheduleController extends MainMenuViewController implements Initia
     private Label sundayLabel;
 
     @FXML
-    private Label MondayLabel;
+    private Label mondayLabel;
 
     @FXML
     private Label tuesdayLabel;
@@ -66,54 +66,85 @@ public class ScheduleController extends MainMenuViewController implements Initia
     private Label wednesdayLabel;
     
     @FXML
-    private Label thurdayLabel;
+    private Label thursdayLabel;
     
     @FXML
-    private Label FridayLabel;
+    private Label fridayLabel;
     
     @FXML
     private Label saturdayLabel;
     
     void calculateWeek() {
     	String dayOfWeek = scheduleDatePicker.getValue().getDayOfWeek().name();
+    	LocalDate startOfWeek = null;
     	if (dayOfWeek.equals("SUNDAY")) {
-
+    		startOfWeek = selectedDate.minusDays(0);
     	} else if (dayOfWeek.equals("MONDAY")){
-    		
+    		startOfWeek = selectedDate.minusDays(1);
     	} else if (dayOfWeek.equals("TUESDAY")){
-    		
+    		startOfWeek = selectedDate.minusDays(2);
     	} else if (dayOfWeek.equals("WEDNESDAY")){
-    		LocalDate startOfWeek = selectedDate.minusDays(3);
-    		LocalDate endOfWeek = selectedDate.plusDays(3);
-    		selectedWeek = new Week(startOfWeek, endOfWeek);
-    		weekRange.setText(selectedWeek.toString());
+    		startOfWeek = selectedDate.minusDays(3);
     	} else if (dayOfWeek.equals("THURSDAY")){
-    		
+    		startOfWeek = selectedDate.minusDays(4);
     	} else if (dayOfWeek.equals("FRIDAY")){
-    		
+    		startOfWeek = selectedDate.minusDays(5);
     	} else if (dayOfWeek.equals("SATURDAY")){
-    		
+    		startOfWeek = selectedDate.minusDays(6);
     	}
+    	selectedWeek = new Week(startOfWeek);
     }
     
     @FXML
     void followingWeek(ActionEvent event) {
     	selectedDate = selectedDate.plusWeeks(1);
-    	calculateWeek();
+    	update();
     }
 
     @FXML
     void previousWeek(ActionEvent event) {
     	selectedDate = selectedDate.minusWeeks(1);
-    	calculateWeek();
+    	update();
     }
     
     void setWeek() {
     	selectedDate = scheduleDatePicker.getValue();
-    	calculateWeek();
+    	update();
     }
     
     public void update() {
+    	
+    	calculateWeek();	
+		weekRange.setText(selectedWeek.toString());
+		scheduleDatePicker.setValue(selectedDate);
+    	sundayLabel.setText("Sunday " + selectedWeek.getDaysOfWeek().get(0).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(0).getDayOfMonth());
+    	mondayLabel.setText("Monday " + selectedWeek.getDaysOfWeek().get(1).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(1).getDayOfMonth());
+    	tuesdayLabel.setText("Tueday " + selectedWeek.getDaysOfWeek().get(2).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(2).getDayOfMonth());
+    	wednesdayLabel.setText("Wednesday " + selectedWeek.getDaysOfWeek().get(3).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(3).getDayOfMonth());
+    	thursdayLabel.setText("Thursday " + selectedWeek.getDaysOfWeek().get(4).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(4).getDayOfMonth());
+    	fridayLabel.setText("Friday " + selectedWeek.getDaysOfWeek().get(5).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(5).getDayOfMonth());
+    	saturdayLabel.setText("Saturday " + selectedWeek.getDaysOfWeek().get(6).getMonthValue() + "/" + selectedWeek.getDaysOfWeek().get(6).getDayOfMonth());
+    	
+    	for (Node node : gridPane.getChildren()) {
+    		if (node instanceof VBox) {
+    			node.setStyle(null);
+    			node.setStyle("-fx-border-color: #E8E8E8;");
+    			int dayofWeekValue = 0;
+    			
+    			if (selectedDate.getDayOfWeek().getValue() == 7) {
+    				dayofWeekValue = 1;
+    			} else {
+    				dayofWeekValue = selectedDate.getDayOfWeek().getValue()+1;
+    			}
+    			
+    			if (GridPane.getColumnIndex(node) == dayofWeekValue) {
+        			node.setStyle("-fx-background-color: #e6fcff; -fx-border-color: #E8E8E8;");
+        			node.setViewOrder(1);
+        		}
+    		}
+    	}
+    	
+    	// Code for fixing blur in about text area
     	aboutTextArea.setCache(false);
 		ScrollPane sp = (ScrollPane) aboutTextArea.getChildrenUnmodifiable().get(0);
 		sp.setCache(false);

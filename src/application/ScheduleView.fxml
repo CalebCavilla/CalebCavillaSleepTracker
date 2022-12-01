@@ -222,12 +222,12 @@
                         <Label text="10:00" GridPane.rowIndex="23" />
                         <Label text="11:00" GridPane.rowIndex="24" />
                         <Label fx:id="sundayLabel" text="Sunday Label" GridPane.columnIndex="1" />
-                        <Label fx:id="MondayLabel" text="Monday Label" GridPane.columnIndex="2" />
+                        <Label fx:id="mondayLabel" text="Monday Label" GridPane.columnIndex="2" />
                         <Label fx:id="tuesdayLabel" text="Tuesday Label" GridPane.columnIndex="3" />
-                        <Label fx:id="thurdayLabel" text="Thursday Label" GridPane.columnIndex="5" />
+                        <Label fx:id="thursdayLabel" text="Thursday Label" GridPane.columnIndex="5" />
                         <Label fx:id="wednesdayLabel" text="Wednesday Label" GridPane.columnIndex="4" />
-                        <Label fx:id="FridayLabel" text="Friday Label" GridPane.columnIndex="6" />
-                        <Label text="Saturday Label" GridPane.columnIndex="7" />
+                        <Label fx:id="fridayLabel" text="Friday Label" GridPane.columnIndex="6" />
+                        <Label fx:id="saturdayLabel" text="Saturday Label" GridPane.columnIndex="7" />
                      </children>
                   </GridPane>
                </children></AnchorPane>
