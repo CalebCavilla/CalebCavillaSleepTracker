@@ -23,7 +23,12 @@ import javafx.scene.layout.VBox;
 
 public class ScheduleController extends MainMenuViewController implements Initializable{
 
+	private DatePicker scheduleDatePicker = new DatePicker(LocalDate.now());
 
+	private Week selectedWeek;
+	
+	private LocalDate selectedDate = scheduleDatePicker.getValue();
+	
     @FXML
     private VBox scheduleVBox;
 
@@ -69,14 +74,43 @@ public class ScheduleController extends MainMenuViewController implements Initia
     @FXML
     private Label saturdayLabel;
     
+    void calculateWeek() {
+    	String dayOfWeek = scheduleDatePicker.getValue().getDayOfWeek().name();
+    	if (dayOfWeek.equals("SUNDAY")) {
+
+    	} else if (dayOfWeek.equals("MONDAY")){
+    		
+    	} else if (dayOfWeek.equals("TUESDAY")){
+    		
+    	} else if (dayOfWeek.equals("WEDNESDAY")){
+    		LocalDate startOfWeek = selectedDate.minusDays(3);
+    		LocalDate endOfWeek = selectedDate.plusDays(3);
+    		selectedWeek = new Week(startOfWeek, endOfWeek);
+    		weekRange.setText(selectedWeek.toString());
+    	} else if (dayOfWeek.equals("THURSDAY")){
+    		
+    	} else if (dayOfWeek.equals("FRIDAY")){
+    		
+    	} else if (dayOfWeek.equals("SATURDAY")){
+    		
+    	}
+    }
+    
     @FXML
     void followingWeek(ActionEvent event) {
-    	System.out.println(gridPane.getChildren().size());
+    	selectedDate = selectedDate.plusWeeks(1);
+    	calculateWeek();
     }
 
     @FXML
     void previousWeek(ActionEvent event) {
-
+    	selectedDate = selectedDate.minusWeeks(1);
+    	calculateWeek();
+    }
+    
+    void setWeek() {
+    	selectedDate = scheduleDatePicker.getValue();
+    	calculateWeek();
     }
     
     public void update() {
@@ -90,9 +124,12 @@ public class ScheduleController extends MainMenuViewController implements Initia
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		DatePicker scheduleDatePicker = new DatePicker(LocalDate.now());
+		scheduleDatePicker.setOnAction(event -> setWeek());
 		DatePickerSkin datePickerSkin = new DatePickerSkin(scheduleDatePicker);
 		Node popupContent = datePickerSkin.getPopupContent();
+		
+		LocalDate x = scheduleDatePicker.getValue();
+		System.out.println(x.getDayOfWeek());
 		scheduleVBox.getChildren().add(0,popupContent);
 		
 		for (int i = 0; i < gridPane.getColumnCount(); i++) {
@@ -102,8 +139,9 @@ public class ScheduleController extends MainMenuViewController implements Initia
 				gridPane.add(vbox, i, j);
 			}
 		}
-			
 		
+		calculateWeek();	
+		weekRange.setText(selectedWeek.toString());
 		
 		try {
 			// Blue Box
