@@ -112,6 +112,12 @@ public class ScheduleController extends MainMenuViewController implements Initia
     	update();
     }
     
+    @FXML
+    void switchMainMenuView(ActionEvent event) {
+    	applicationStage.setScene(mainMenuView);
+    	applicationStage.setTitle("Main Menu");
+    }
+    
     public void update() {
     	
     	calculateWeek();	

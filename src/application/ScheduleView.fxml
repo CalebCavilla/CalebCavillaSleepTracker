@@ -20,7 +20,7 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="BACK">
+            <Button mnemonicParsing="false" onAction="#switchMainMenuView" text="BACK">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
