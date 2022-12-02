@@ -53,8 +53,6 @@ public class MainMenuViewController extends Main {
     @FXML
     void switchDiaryView(ActionEvent event) {
     	try {
-    		System.out.println("Hello world");
-    		System.out.println(user.getAge());
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();

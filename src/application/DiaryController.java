@@ -99,7 +99,6 @@ public class DiaryController extends MainMenuViewController {
 			
 			Time sleepDebt = sleepSoFar.difference(sleepGoal);
 			day.setSleepDebt(sleepDebt);
-			System.out.println(day.getSleepDebt().printTimeFormat());
 		}
     }
     
@@ -140,7 +139,7 @@ public class DiaryController extends MainMenuViewController {
 					sleepType.setPadding(new Insets(0,0,10,10));
 					HBox sleepInfoHbox = new HBox();
 					sleepInfoHbox.setPadding(new Insets(0,0,10,0));
-					Label sleepTimes = new Label("Sleep Time: " + j.getStartTime().printTimeFormat() + " -- " + j.getEndTime().printTimeFormat());
+					Label sleepTimes = new Label("Sleep Time: " + j.getStartTime().printTimeFormat(true) + " -- " + j.getEndTime().printTimeFormat(true));
 					sleepTimes.setPadding(new Insets(0,0,0,10));
 					Label sleepDuration = new Label("Duration: " + j.getDuration().printDifferenceFormat());
 					sleepDuration.setPadding(new Insets(0,0,0,10));

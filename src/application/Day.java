@@ -13,7 +13,7 @@ public class Day {
 	private Time totalSleep;
 	private Time sleepDebt;
 	
-	public Day(LocalDate date) throws ParseException {
+	public Day(LocalDate date) {
 		this.setDate(date);
 	}
 	

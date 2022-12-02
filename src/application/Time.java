@@ -30,15 +30,18 @@ public class Time {
 		return hours + " hrs " + minutes + " min";
 	}
 	
-	public String printTimeFormat() {
+	public String printTimeFormat(Boolean includePeriod) {
 		String strMinutes;
 		if (minutes == 0) {
 			strMinutes = "00";
 		}else {
 			strMinutes = String.valueOf(minutes);
 		}
-		
-		return hours + ":" + strMinutes + " " + period;
+		if (includePeriod) {
+			return hours + ":" + strMinutes + " " + period;
+		}else {
+			return hours + ":" + strMinutes + " ";
+		}
 	}
 	
 	public Time difference(Time other) {
@@ -59,8 +62,11 @@ public class Time {
     	// calculate the users total goal for hours of sleep
     	// Going from the morning to the morning
     	if (this.period.equals("am") && other.period.equals("am")){
-    		if (startHours == 12) {
+    		if (startHours == 12 ) {
     			startHours = 0;
+    		}
+    		if (endHours == 12 ) {
+    			endHours = 0;
     		}
     		
 			if (startMinutes > endMinutes) {
