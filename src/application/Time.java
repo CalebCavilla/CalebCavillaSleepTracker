@@ -18,6 +18,12 @@ public class Time {
 		this.hours = hours;
 		this.minutes = minutes;
 	}
+	
+	public Time(Time toCopy) {
+		this.hours = toCopy.hours;
+		this.minutes = toCopy.minutes;
+		this.period = toCopy.period;
+	}
 
 	
 	public String printDifferenceFormat() {

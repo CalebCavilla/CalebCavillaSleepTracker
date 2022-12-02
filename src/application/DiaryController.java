@@ -90,6 +90,19 @@ public class DiaryController extends MainMenuViewController {
 		}
     }
     
+    public void calculateSleepDebt(Day day) {
+    	if (user.getGoalTotalSleep() != null){
+			
+			Time sleepSoFar = new Time(day.getTotalSleep().getHours(), day.getTotalSleep().getMinutes(), "am");
+			Time sleepGoal = new Time(user.getGoalTotalSleep().getHours(), user.getGoalTotalSleep().getMinutes(), "am");
+			
+			
+			Time sleepDebt = sleepSoFar.difference(sleepGoal);
+			day.setSleepDebt(sleepDebt);
+			System.out.println(day.getSleepDebt().printTimeFormat());
+		}
+    }
+    
     public void updateView() {
     	
     	diaryDatePicker.setValue(selectedDate);
@@ -107,20 +120,13 @@ public class DiaryController extends MainMenuViewController {
     	
     	for (Day i : user.getDiary()) {
 			if (i.getDate().equals(selectedDate)) {
-				
 				// Tracking sleep Progress Code
 				if (user.getGoalTotalSleep() != null){
 					i.calculateTotalSleep();
+					calculateSleepDebt(i);
 					hoursSoFarLabel.setText(String.valueOf(i.getTotalSleep().getHours()));
 					MinutesSoFarLabel.setText(String.valueOf(i.getTotalSleep().getMinutes()));
-					
-					Time sleepSoFar = new Time(i.getTotalSleep().getHours(), i.getTotalSleep().getMinutes(), "am");
-					Time sleepGoal = new Time(user.getGoalTotalSleep().getHours(), user.getGoalTotalSleep().getMinutes(), "am");
-					
-					
-					Time sleepDebt = sleepSoFar.difference(sleepGoal);
-					user.setSleepDebt(sleepDebt);
-					remainingTimeLabel.setText(sleepDebt.printDifferenceFormat());
+					remainingTimeLabel.setText(i.getSleepDebt().printDifferenceFormat());
 				}
 				// Sleep Periods Code
 				Label sleepPeriodsTitle = new Label("Sleep Periods");

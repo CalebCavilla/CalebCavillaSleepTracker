@@ -123,8 +123,9 @@ public class ScheduleController extends MainMenuViewController implements Initia
     }
     
     public void generateGoalSchedule() {
-    	Time goalBedTime = user.getGoalBedTime();
-    	Time goalAwakeTime = user.getGoalAwakeTime();
+    	Time goalBedTime = new Time(user.getGoalBedTime());
+    	goalBedTime.setHours(goalBedTime.getHours());
+    	Time goalAwakeTime = new Time(user.getGoalAwakeTime());
     	int bedRowIndex = 0;
     	int awakeRowIndex = 0;
     	Button goalSleepButton;

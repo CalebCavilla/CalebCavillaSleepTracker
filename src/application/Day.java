@@ -11,6 +11,7 @@ public class Day {
 	private LocalDate date;
 	private ArrayList<Sleep> sleepPeriods = new ArrayList<Sleep>();
 	private Time totalSleep;
+	private Time sleepDebt;
 	
 	public Day(LocalDate date) throws ParseException {
 		this.setDate(date);
@@ -51,6 +52,16 @@ public class Day {
 
 	public void setTotalSleep(Time totalSleep) {
 		this.totalSleep = totalSleep;
+	}
+
+
+	public Time getSleepDebt() {
+		return sleepDebt;
+	}
+
+
+	public void setSleepDebt(Time sleepDebt) {
+		this.sleepDebt = sleepDebt;
 	}
 
 
