@@ -7,6 +7,7 @@ public class User {
 	private Time goalBedTime;
 	private Time goalAwakeTime;
 	private Time goalTotalSleep;
+	private Time sleepDebt;
 	private String goalMood;
 	private String gender;
 	private int age;
@@ -14,7 +15,6 @@ public class User {
 	private int height;
 	
 	private ArrayList<Day> diary = new ArrayList<Day>();
-	
 	
 	
 	public User() {
@@ -130,6 +130,13 @@ public class User {
 	public ArrayList<Day> getDiary() {
 		return diary;
 	}
-	
+
+	public Time getSleepDebt() {
+		return sleepDebt;
+	}
+
+	public void setSleepDebt(Time sleepDebt) {
+		this.sleepDebt = sleepDebt;
+	}
 
 }

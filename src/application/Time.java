@@ -73,9 +73,13 @@ public class Time {
     		if (startHours != 12) {
     			startHours += 12;
     		}
+    		if (endHours == 12) {
+    			endHours = 0;
+    		}
+    		
 			if (startMinutes > 0) {
 				hoursDifference = ((23 - startHours) + endHours) + ((60 - startMinutes) + endMinutes) / 60;
-				minutesDifference = ((60 - startMinutes) + endMinutes);
+				minutesDifference = ((60 - startMinutes) + endMinutes) % 60;
 
     		} else if (startMinutes == 0) {
         		hoursDifference = (24 - startHours) + endHours;
@@ -84,6 +88,10 @@ public class Time {
 		
 		// Going from the afternoon to the afternoon
     	} else if (this.period.equals("pm") && other.period.equals("pm")){
+    		if (startHours == 12) {
+    			startHours = 0;
+    		}
+    		
     		if (startMinutes > endMinutes) {
     			endHours -= 1;
     			endMinutes += 60;

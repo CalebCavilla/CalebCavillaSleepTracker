@@ -117,7 +117,10 @@ public class DiaryController extends MainMenuViewController {
 					Time sleepSoFar = new Time(i.getTotalSleep().getHours(), i.getTotalSleep().getMinutes(), "am");
 					Time sleepGoal = new Time(user.getGoalTotalSleep().getHours(), user.getGoalTotalSleep().getMinutes(), "am");
 					
-					remainingTimeLabel.setText((sleepSoFar.difference(sleepGoal).printDifferenceFormat()));
+					
+					Time sleepDebt = sleepSoFar.difference(sleepGoal);
+					user.setSleepDebt(sleepDebt);
+					remainingTimeLabel.setText(sleepDebt.printDifferenceFormat());
 				}
 				// Sleep Periods Code
 				Label sleepPeriodsTitle = new Label("Sleep Periods");

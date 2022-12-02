@@ -9,7 +9,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -118,6 +122,55 @@ public class ScheduleController extends MainMenuViewController implements Initia
     	applicationStage.setTitle("Main Menu");
     }
     
+    public void generateGoalSchedule() {
+    	Time goalBedTime = user.getGoalBedTime();
+    	Time goalAwakeTime = user.getGoalAwakeTime();
+    	int bedRowIndex = 0;
+    	int awakeRowIndex = 0;
+    	Button goalSleepButton;
+    	
+    	// Fix times to be in 24 hour format
+    	if (goalBedTime.getPeriod().equals("pm") && goalBedTime.getHours() != 12){
+    		goalBedTime.setHours(goalBedTime.getHours()+12);
+    	} else if (goalBedTime.getPeriod().equals("am") && goalBedTime.getHours() == 12) {
+    		goalBedTime.setHours(goalBedTime.getHours()+12);
+    	}
+    	if (goalAwakeTime.getPeriod().equals("pm") && goalAwakeTime.getHours() != 12){
+    		goalAwakeTime.setHours(goalAwakeTime.getHours()+12);
+    	} else if (goalAwakeTime.getPeriod().equals("am") && goalAwakeTime.getHours() == 12) {
+    		goalAwakeTime.setHours(goalAwakeTime.getHours()+12);
+    	}
+    	
+    	// Calculate bed time Row Index
+    	if (goalBedTime.getHours() >= 12) {
+    		bedRowIndex = goalBedTime.getHours() - 11;
+    	} else {
+    		bedRowIndex = goalBedTime.getHours() + 13;
+    	}
+    	
+    	// Calculate awake time Row Index
+    	if (goalAwakeTime.getHours() >= 12) {
+    		awakeRowIndex = goalAwakeTime.getHours() - 11;
+    	} else {
+    		awakeRowIndex = goalAwakeTime.getHours() + 13;
+    	}
+    	
+    	// Draw the buttons to the scene
+    	for (int i = 1; i < gridPane.getColumnCount(); i++) {
+    		goalSleepButton = new Button(goalBedTime.printTimeFormat() + " - \n" + goalAwakeTime.printTimeFormat());
+    		goalSleepButton.setMinHeight(Math.abs(awakeRowIndex - bedRowIndex) * 28 + ((28*(goalAwakeTime.getMinutes()/60.0))-(28*(goalBedTime.getMinutes()/60.0))));
+    		// margin to account for bed time minutes
+    		GridPane.setMargin(goalSleepButton, new Insets(28*(goalBedTime.getMinutes()/60.0),0,0,0));
+    		GridPane.setValignment(goalSleepButton, VPos.TOP);
+    		GridPane.setHalignment(goalSleepButton, HPos.LEFT);
+    		goalSleepButton.setMinWidth(90);
+    		goalSleepButton.setMouseTransparent(true);
+    		goalSleepButton.setFocusTraversable(false);
+    		goalSleepButton.setStyle("-fx-background-color: #FF98DD;");
+    		gridPane.add(goalSleepButton, i, bedRowIndex);
+    	}   	
+    }
+    
     public void update() {
     	
     	calculateWeek();	
@@ -176,6 +229,7 @@ public class ScheduleController extends MainMenuViewController implements Initia
 				gridPane.add(vbox, i, j);
 			}
 		}
+		
 		
 		calculateWeek();	
 		weekRange.setText(selectedWeek.toString());

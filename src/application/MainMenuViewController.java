@@ -93,6 +93,7 @@ public class MainMenuViewController extends Main {
 			applicationStage.setScene(scheduleView);
 			applicationStage.setTitle("Schedule");
 			scheduleController.update();
+			scheduleController.generateGoalSchedule();
 			applicationStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

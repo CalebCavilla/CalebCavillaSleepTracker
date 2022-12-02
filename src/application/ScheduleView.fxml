@@ -27,7 +27,7 @@
             </Button>
             <Label text="Schedule" textFill="#0080ff">
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="50.0" />
                </HBox.margin>
                <font>
                   <Font size="29.0" />
@@ -35,7 +35,7 @@
             </Label>
             <Button mnemonicParsing="false" onAction="#previousWeek" prefHeight="40.0" prefWidth="50.0" text="&lt;">
                <HBox.margin>
-                  <Insets left="96.0" />
+                  <Insets left="66.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="18.0" />
