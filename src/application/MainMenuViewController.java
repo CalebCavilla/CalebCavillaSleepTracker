@@ -7,9 +7,13 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -49,8 +53,6 @@ public class MainMenuViewController extends Main {
     @FXML
     void switchDiaryView(ActionEvent event) {
     	try {
-    		System.out.println("Hello world");
-    		System.out.println(user.getAge());
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
@@ -75,13 +77,27 @@ public class MainMenuViewController extends Main {
     
     @FXML
     void switchScheduleView(ActionEvent event) {
-    	System.out.println(user.getDiary());
-    	System.out.println(user.getDiary().get(0).getSleepPeriods());
-    	System.out.println(user.getDiary().get(1).getSleepPeriods());
-    	scheduleView = new Scene(new Label("Schedule"));
-		applicationStage.setScene(scheduleView);
-		applicationStage.setTitle("Schedule");
-		applicationStage.show();
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane scheduleRoot = loader.load(new FileInputStream("src/application/ScheduleView.fxml"));
+			ScheduleController scheduleController = (ScheduleController) loader.getController();
+			scheduleController.applicationStage = applicationStage;
+			scheduleView = new Scene(scheduleRoot,1100,750);
+			
+			
+			scheduleController.settingsView = settingsView;
+			scheduleController.mainMenuView = mainMenuView;
+			scheduleController.user = user;
+			applicationStage.setScene(scheduleView);
+			applicationStage.setTitle("Schedule");
+			scheduleController.update();
+			scheduleController.generateGoalSchedule();
+			scheduleController.generateDiarySchedule();
+			applicationStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }	
 
     @FXML

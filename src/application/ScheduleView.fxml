@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1141.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchMainMenuView" text="BACK">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+            <Label text="Schedule" textFill="#0080ff">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#previousWeek" prefHeight="40.0" prefWidth="50.0" text="&lt;">
+               <HBox.margin>
+                  <Insets left="66.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#followingWeek" prefHeight="40.0" prefWidth="50.0" text="&gt;">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="weekRange" text="Week Range">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+         </children></HBox>
+   </top>
+   <left>
+      <VBox fx:id="scheduleVBox" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <TitledPane animated="false" text="My Schedule">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="301.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="301.0">
+                                 <children>
+                                    <ImageView fx:id="blueBoxImage" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="17.0" prefWidth="91.0" text="Main Sleep">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="301.0">
+                                 <children>
+                                    <ImageView fx:id="greenBoxImage" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label text="Naps">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Generated Recomondations">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="298.0">
+                           <children>
+                              <HBox prefHeight="25.0" prefWidth="298.0">
+                                 <children>
+                                    <ImageView fx:id="pinkBoxImage" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="17.0" prefWidth="279.0" text="Recommended Sleep Time">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fx:id="lightPinkBoxImage" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="17.0" prefWidth="265.0" text="Recommended Wind Down Time">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane animated="false" text="About">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="aboutTextArea" editable="false" layoutX="19.6" layoutY="19.6" prefHeight="155.0" prefWidth="298.0" text="Your current schedule as it stands is generated&#10;here. &#10;&#10;This application considers sleep time as the&#10;night you are trying to fall asleep. So even&#10;though you may fall asleep at 4:00 am and&#10;wake up at 11:00 am, the app will still count &#10;that as the sleep of the previous day. &#10;&#10;This app is currently only designed for people who &#10;are active during the day, (ie no naps before&#10;12 pm and assumes you wake up before 12pm.&#10;I had to draw the line somewhere, so I chose&#10;times that should fit 90% of peoples needs.&#10;&#10;- If no goals have been set the application will &#10;not recommend any sleep times &#10;&#10;- If no journal entries have been made no &#10;custom sleep times will be displayed." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+         </children></VBox>
+   </left>
+   <center>
+      <ScrollPane prefHeight="384.0" prefWidth="629.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="701.0" prefWidth="777.0">
+               <children>
+                  <GridPane fx:id="gridPane" alignment="CENTER" prefHeight="504.0" prefWidth="743.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label contentDisplay="CENTER" text="12:00" GridPane.rowIndex="1" />
+                        <Label text="13:00" GridPane.rowIndex="2" />
+                        <Label text="14:00" GridPane.rowIndex="3" />
+                        <Label text="15:00" GridPane.rowIndex="4" />
+                        <Label text="16:00" GridPane.rowIndex="5" />
+                        <Label text="17:00" GridPane.rowIndex="6" />
+                        <Label text="18:00" GridPane.rowIndex="7" />
+                        <Label text="19:00" GridPane.rowIndex="8" />
+                        <Label text="20:00" GridPane.rowIndex="9" />
+                        <Label text="21:00" GridPane.rowIndex="10" />
+                        <Label text="22:00" GridPane.rowIndex="11" />
+                        <Label text="23:00" GridPane.rowIndex="12" />
+                        <Label text="24:00" GridPane.rowIndex="13" />
+                        <Label text="1:00" GridPane.rowIndex="14" />
+                        <Label text="2:00" GridPane.rowIndex="15" />
+                        <Label text="3:00" GridPane.rowIndex="16" />
+                        <Label text="4:00" GridPane.rowIndex="17" />
+                        <Label text="5:00" GridPane.rowIndex="18" />
+                        <Label text="6:00" GridPane.rowIndex="19" />
+                        <Label text="7:00" GridPane.rowIndex="20" />
+                        <Label text="8:00" GridPane.rowIndex="21" />
+                        <Label text="9:00" GridPane.rowIndex="22" />
+                        <Label text="10:00" GridPane.rowIndex="23" />
+                        <Label text="11:00" GridPane.rowIndex="24" />
+                        <Label fx:id="sundayLabel" text="Sunday Label" GridPane.columnIndex="1" />
+                        <Label fx:id="mondayLabel" text="Monday Label" GridPane.columnIndex="2" />
+                        <Label fx:id="tuesdayLabel" text="Tuesday Label" GridPane.columnIndex="3" />
+                        <Label fx:id="thursdayLabel" text="Thursday Label" GridPane.columnIndex="5" />
+                        <Label fx:id="wednesdayLabel" text="Wednesday Label" GridPane.columnIndex="4" />
+                        <Label fx:id="fridayLabel" text="Friday Label" GridPane.columnIndex="6" />
+                        <Label fx:id="saturdayLabel" text="Saturday Label" GridPane.columnIndex="7" />
+                     </children>
+                  </GridPane>
+               </children></AnchorPane>
+        </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

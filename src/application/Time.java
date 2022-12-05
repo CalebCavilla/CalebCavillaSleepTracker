@@ -18,21 +18,30 @@ public class Time {
 		this.hours = hours;
 		this.minutes = minutes;
 	}
+	
+	public Time(Time toCopy) {
+		this.hours = toCopy.hours;
+		this.minutes = toCopy.minutes;
+		this.period = toCopy.period;
+	}
 
 	
 	public String printDifferenceFormat() {
 		return hours + " hrs " + minutes + " min";
 	}
 	
-	public String printTimeFormat() {
+	public String printTimeFormat(Boolean includePeriod) {
 		String strMinutes;
 		if (minutes == 0) {
 			strMinutes = "00";
 		}else {
 			strMinutes = String.valueOf(minutes);
 		}
-		
-		return hours + ":" + strMinutes + " " + period;
+		if (includePeriod) {
+			return hours + ":" + strMinutes + " " + period;
+		}else {
+			return hours + ":" + strMinutes + " ";
+		}
 	}
 	
 	public Time difference(Time other) {
@@ -53,8 +62,11 @@ public class Time {
     	// calculate the users total goal for hours of sleep
     	// Going from the morning to the morning
     	if (this.period.equals("am") && other.period.equals("am")){
-    		if (startHours == 12) {
+    		if (startHours == 12 ) {
     			startHours = 0;
+    		}
+    		if (endHours == 12 ) {
+    			endHours = 0;
     		}
     		
 			if (startMinutes > endMinutes) {
@@ -73,9 +85,13 @@ public class Time {
     		if (startHours != 12) {
     			startHours += 12;
     		}
+    		if (endHours == 12) {
+    			endHours = 0;
+    		}
+    		
 			if (startMinutes > 0) {
 				hoursDifference = ((23 - startHours) + endHours) + ((60 - startMinutes) + endMinutes) / 60;
-				minutesDifference = ((60 - startMinutes) + endMinutes);
+				minutesDifference = ((60 - startMinutes) + endMinutes) % 60;
 
     		} else if (startMinutes == 0) {
         		hoursDifference = (24 - startHours) + endHours;
@@ -84,6 +100,10 @@ public class Time {
 		
 		// Going from the afternoon to the afternoon
     	} else if (this.period.equals("pm") && other.period.equals("pm")){
+    		if (startHours == 12) {
+    			startHours = 0;
+    		}
+    		
     		if (startMinutes > endMinutes) {
     			endHours -= 1;
     			endMinutes += 60;

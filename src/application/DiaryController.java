@@ -90,6 +90,18 @@ public class DiaryController extends MainMenuViewController {
 		}
     }
     
+    public void calculateSleepDebt(Day day) {
+    	if (user.getGoalTotalSleep() != null){
+			
+			Time sleepSoFar = new Time(day.getTotalSleep().getHours(), day.getTotalSleep().getMinutes(), "am");
+			Time sleepGoal = new Time(user.getGoalTotalSleep().getHours(), user.getGoalTotalSleep().getMinutes(), "am");
+			
+			
+			Time sleepDebt = sleepSoFar.difference(sleepGoal);
+			day.setSleepDebt(sleepDebt);
+		}
+    }
+    
     public void updateView() {
     	
     	diaryDatePicker.setValue(selectedDate);
@@ -107,17 +119,13 @@ public class DiaryController extends MainMenuViewController {
     	
     	for (Day i : user.getDiary()) {
 			if (i.getDate().equals(selectedDate)) {
-				
 				// Tracking sleep Progress Code
 				if (user.getGoalTotalSleep() != null){
 					i.calculateTotalSleep();
+					calculateSleepDebt(i);
 					hoursSoFarLabel.setText(String.valueOf(i.getTotalSleep().getHours()));
 					MinutesSoFarLabel.setText(String.valueOf(i.getTotalSleep().getMinutes()));
-					
-					Time sleepSoFar = new Time(i.getTotalSleep().getHours(), i.getTotalSleep().getMinutes(), "am");
-					Time sleepGoal = new Time(user.getGoalTotalSleep().getHours(), user.getGoalTotalSleep().getMinutes(), "am");
-					
-					remainingTimeLabel.setText((sleepSoFar.difference(sleepGoal).printDifferenceFormat()));
+					remainingTimeLabel.setText(i.getSleepDebt().printDifferenceFormat());
 				}
 				// Sleep Periods Code
 				Label sleepPeriodsTitle = new Label("Sleep Periods");
@@ -131,9 +139,9 @@ public class DiaryController extends MainMenuViewController {
 					sleepType.setPadding(new Insets(0,0,10,10));
 					HBox sleepInfoHbox = new HBox();
 					sleepInfoHbox.setPadding(new Insets(0,0,10,0));
-					Label sleepTimes = new Label("Sleep Time: " + j.getStartTime().printTimeFormat() + " -- " + j.getEndTime().printTimeFormat());
+					Label sleepTimes = new Label("Sleep Time: " + j.getStartTime().printTimeFormat(true) + " -- " + j.getEndTime().printTimeFormat(true));
 					sleepTimes.setPadding(new Insets(0,0,0,10));
-					Label sleepDuration = new Label("Duration: " + j.getTotalSleep().printDifferenceFormat());
+					Label sleepDuration = new Label("Duration: " + j.getDuration().printDifferenceFormat());
 					sleepDuration.setPadding(new Insets(0,0,0,10));
 					Label mood = new Label("Mood: " + j.getMood());
 					mood.setPadding(new Insets(0,0,0,10));
