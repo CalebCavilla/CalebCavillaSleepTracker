@@ -47,6 +47,7 @@ public class Day {
 
 	
 	public Time getTotalSleep() {
+		calculateTotalSleep();
 		return totalSleep;
 	}
 

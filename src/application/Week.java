@@ -49,7 +49,6 @@ public class Week {
 	public void setDaysOfWeek(ArrayList<Day> daysOfWeek) {
 		this.daysOfWeek = daysOfWeek;
 	}
-
 }
 
 	

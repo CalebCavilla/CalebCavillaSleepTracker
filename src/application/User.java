@@ -1,5 +1,6 @@
 package application;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User {
@@ -18,7 +19,7 @@ public class User {
 	
 	
 	public User() {
-		// TODO Auto-generated constructor stub
+		diary.add(new Day(LocalDate.MIN));
 	}
 
 	public void print() {

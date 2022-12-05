@@ -44,10 +44,26 @@ public class MainMenuViewController extends Main {
 
     @FXML
     void switchDashboardView(ActionEvent event) {
-		dashboardView = new Scene(new Label("Dashboard"));
-		applicationStage.setScene(dashboardView);
-		applicationStage.setTitle("Dashboard");
-		applicationStage.show();
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			VBox dashboardRoot = loader.load(new FileInputStream("src/application/DashboardView.fxml"));
+			DashboardController dashboardController = (DashboardController) loader.getController();
+			
+			// set instance variables
+			dashboardController.applicationStage = applicationStage;
+			dashboardController.mainMenuView = mainMenuView;
+			dashboardController.user = user;
+			
+			dashboardController.update();
+			
+			// create the scene
+			dashboardView = new Scene(dashboardRoot,550,400);
+			applicationStage.setScene(dashboardView);
+			applicationStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -91,8 +107,6 @@ public class MainMenuViewController extends Main {
 			applicationStage.setScene(scheduleView);
 			applicationStage.setTitle("Schedule");
 			scheduleController.update();
-			scheduleController.generateGoalSchedule();
-			scheduleController.generateDiarySchedule();
 			applicationStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

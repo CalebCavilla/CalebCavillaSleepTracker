@@ -28,6 +28,7 @@ public class SettingsController extends MainMenuViewController{
 			e.printStackTrace();
 		}
     }
+    
     @FXML
     void switchMainMenuView() {
     	applicationStage.setScene(mainMenuView);

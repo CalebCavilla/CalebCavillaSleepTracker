@@ -102,15 +102,18 @@ public class ScheduleController extends MainMenuViewController implements Initia
     @FXML
     void followingWeek(ActionEvent event) {
     	selectedDate = selectedDate.plusWeeks(1);
+    	update();
     }
 
     @FXML
     void previousWeek(ActionEvent event) {
     	selectedDate = selectedDate.minusWeeks(1);
+    	update();
     }
     
     void setWeek() {
     	selectedDate = scheduleDatePicker.getValue();
+    	update();
     }
     
     @FXML
@@ -120,15 +123,15 @@ public class ScheduleController extends MainMenuViewController implements Initia
     }
     
     
-    public void generateGoalSchedule() {
+    public void generateButton(Sleep sleep, boolean isAffectedByDebt, int column) {
     	
-    	Time bededTime = new Time(user.getGoalBedTime());
-    	Time awakeTime = new Time(user.getGoalAwakeTime());
+    	Time bededTime = new Time(sleep.getStartTime());
+    	Time awakeTime = new Time(sleep.getEndTime());
     	int bedRowIndex = 0;
     	int awakeRowIndex = 0;
     	Button goalSleepButton = new Button("Somthin broke");
     	int latestDay = 0;
-    	
+    	Time sleepDebt;
     	// get sleep debt per Day
     	for (Day i : selectedWeek.getDaysOfWeek()) {
     		for (Day j : user.getDiary()) {
@@ -138,7 +141,11 @@ public class ScheduleController extends MainMenuViewController implements Initia
     			}
     		}
     	}
-    	Time sleepDebt = selectedWeek.calculateSleepDebt(user);
+    	if (isAffectedByDebt) {
+    		sleepDebt = selectedWeek.calculateSleepDebt(user);
+    	} else {
+    		sleepDebt = new Time(0,0);
+    	}
     	int sleepDebtInMinutes = sleepDebt.getHours() * 60 + sleepDebt.getMinutes();
     	int sleepDebtPerDayInMinutes = sleepDebtInMinutes / (7-latestDay);
     	Time sleepDebtPerDay = new Time(sleepDebtPerDayInMinutes/ 60, sleepDebtPerDayInMinutes % 60);
@@ -174,103 +181,65 @@ public class ScheduleController extends MainMenuViewController implements Initia
     	int bedRowSave = bedRowIndex;
     	Time bedTimeSave = new Time(bededTime);
     	// Draw the buttons to the scene
-    	for (int i = 1; i < gridPane.getColumnCount(); i++) {
-    		// reset variables for each loop
-    		bedRowIndex = bedRowSave;
-    		bededTime = new Time(bedTimeSave);
-    		
-    		// We need to do different things depending on if we are after or before the latest day in the users diary
-    		// This is where we account for sleep debt if the day is after the latest in the diary.
-    		if (i > latestDay) {
-    			bededTime.setHours(bededTime.getHours()-sleepDebtPerDay.getHours());
-    			bededTime.setMinutes(bededTime.getMinutes()-sleepDebtPerDay.getMinutes());
-    			// If sleep is negative that means we went back at least one hour, so we need to adjust hours and minutes so they are not negative
-    			if (bededTime.getMinutes() < 0) {
-    				bedRowIndex -= sleepDebtPerDay.getHours()+1;
-    				bededTime.setHours(bededTime.getHours()-Math.abs(bededTime.getMinutes() /60 + 1));
-    				bededTime.setMinutes(bededTime.getMinutes()+(60 * Math.abs(bededTime.getMinutes() /60 + 1)));
-    			} else {
-    				bedRowIndex -= sleepDebtPerDay.getHours();
-    			}
-    			
-    			goalSleepButton = new Button(bededTime.printTimeFormat(false) + " - \n" + awakeTime.printTimeFormat(false));
-    		// sleep debt does not apply if we are before or equal to the latest day in the diary
-    		} else if (i <= latestDay) {
-    			goalSleepButton = new Button(bededTime.printTimeFormat(false) + " - \n" + awakeTime.printTimeFormat(false));
+    	// reset variables for each loop
+    	bedRowIndex = bedRowSave;
+    	bededTime = new Time(bedTimeSave);
+    	
+    	// We need to do different things depending on if we are after or before the latest day in the users diary
+    	// This is where we account for sleep debt if the day is after the latest in the diary.
+    	if (column > latestDay) {
+    		bededTime.setHours(bededTime.getHours()-sleepDebtPerDay.getHours());
+    		bededTime.setMinutes(bededTime.getMinutes()-sleepDebtPerDay.getMinutes());
+    		// If sleep is negative that means we went back at least one hour, so we need to adjust hours and minutes so they are not negative
+    		if (bededTime.getMinutes() < 0) {
+    			bedRowIndex -= sleepDebtPerDay.getHours()+1;
+    			bededTime.setHours(bededTime.getHours()-Math.abs(bededTime.getMinutes() /60 + 1));
+    			bededTime.setMinutes(bededTime.getMinutes()+(60 * Math.abs(bededTime.getMinutes() /60 + 1)));
+    		} else {
+    			bedRowIndex -= sleepDebtPerDay.getHours();
     		}
     		
-    		// margin to account for bed time minutes
-    		GridPane.setMargin(goalSleepButton, new Insets(28*((bededTime.getMinutes())/60.0),0,0,0));
-    		// set the height of the button based on the awake time hours and minutes,                  					  Here we account for the bedtime margin. 		
-    		goalSleepButton.setMinHeight(Math.abs(awakeRowIndex - bedRowIndex) * 28 + ((28*(awakeTime.getMinutes()/60.0))-(28*(bededTime.getMinutes()/60.0))));
-    		GridPane.setValignment(goalSleepButton, VPos.TOP);
-    		GridPane.setHalignment(goalSleepButton, HPos.LEFT);
-    		goalSleepButton.setMinWidth(90);
+    		goalSleepButton = new Button(bededTime.printTimeFormat(false) + " - \n" + awakeTime.printTimeFormat(false));
+    	// sleep debt does not apply if we are before or equal to the latest day in the diary
+    	} else if (column <= latestDay) {
+    		goalSleepButton = new Button(bededTime.printTimeFormat(false) + " - \n" + awakeTime.printTimeFormat(false));
+    	}
+    	
+    	// margin to account for bed time minutes
+    	GridPane.setMargin(goalSleepButton, new Insets(28*((bededTime.getMinutes())/60.0),0,0,0));
+    	// set the height of the button based on the awake time hours and minutes,                  					  Here we account for the bedtime margin. 		
+    	goalSleepButton.setMinHeight(Math.abs(awakeRowIndex - bedRowIndex) * 28 + ((28*(awakeTime.getMinutes()/60.0))-(28*(bededTime.getMinutes()/60.0))));
+    	GridPane.setValignment(goalSleepButton, VPos.TOP);
+    	GridPane.setHalignment(goalSleepButton, HPos.LEFT);
+    	goalSleepButton.setMinWidth(90);
+    	
+    	if (sleep.getType().equals("Main Sleep")){
+    		goalSleepButton.setStyle("-fx-background-color: #0080FF;");
+    	} else if (sleep.getType().equals("Nap")) {
+    		goalSleepButton.setStyle("-fx-background-color: #00FFBB;");
+    	} else if (sleep.getType().equals("recommended")) {
     		goalSleepButton.setStyle("-fx-background-color: #FF98DD;");
-    		gridPane.add(goalSleepButton, i, bedRowIndex);
-    	}   	
+    	}
+    	gridPane.add(goalSleepButton, column, bedRowIndex);   	
     }
     
-    public void generateDiarySchedule() {
+    public void generateSchedule() {
+    	int matchingDayFlag = 1;
     	for (Day i : selectedWeek.getDaysOfWeek()) {
     		for (Day j : user.getDiary()) {
     			// If the day of the week has an entry in the users diary
     			if (i.getDate().equals(j.getDate())){
+    				matchingDayFlag = selectedWeek.getDaysOfWeek().indexOf(i)+2;
+    				System.out.println("up here");
     				for (Sleep sleepPeriod : j.getSleepPeriods()) {
-    					Time bedTime = new Time(sleepPeriod.getStartTime());
-    			    	Time awakeTime = new Time(sleepPeriod.getEndTime());
-    			    	int bedRowIndex = 0;
-    			    	int awakeRowIndex = 0;
-    			    	Button goalSleepButton = new Button("Somthin broke");
-
-    			    	
-    			    	// Fix times to be in 24 hour format
-    			    	if (bedTime.getPeriod().equals("pm") && bedTime.getHours() != 12){
-    			    		bedTime.setHours(bedTime.getHours()+12);
-    			    	} else if (bedTime.getPeriod().equals("am") && bedTime.getHours() == 12) {
-    			    		bedTime.setHours(bedTime.getHours()+12);
-    			    	}
-    			    	if (awakeTime.getPeriod().equals("pm") && awakeTime.getHours() != 12){
-    			    		awakeTime.setHours(awakeTime.getHours()+12);
-    			    	} else if (awakeTime.getPeriod().equals("am") && awakeTime.getHours() == 12) {
-    			    		awakeTime.setHours(awakeTime.getHours()+12);
-    			    	}
-    			    	
-    			    	// Calculate bed time Row Index
-    			    	if (bedTime.getHours() >= 12) {
-    			    		bedRowIndex = bedTime.getHours() - 11;
-    			    	} else {
-    			    		bedRowIndex = bedTime.getHours() + 13;
-    			    	}
-    			    	
-    			    	// Calculate awake time Row Index
-    			    	if (awakeTime.getHours() >= 12) {
-    			    		awakeRowIndex = awakeTime.getHours() - 11;
-    			    	} else {
-    			    		awakeRowIndex = awakeTime.getHours() + 13;
-    			    	}
-    			    	
-
-    			    	// Draw the buttons to the scene
-    			    	goalSleepButton = new Button(bedTime.printTimeFormat(false) + " - \n" + awakeTime.printTimeFormat(false));
-    			    	// margin to account for bed time minutes
-    			    	GridPane.setMargin(goalSleepButton, new Insets(28*((bedTime.getMinutes())/60.0),0,0,0));
-    			    	// set the height of the button based on the awake time hours and minutes,                  					  Here we account for the bedtime margin. 		
-    			    	goalSleepButton.setMinHeight(Math.abs(awakeRowIndex - bedRowIndex) * 28 + ((28*(awakeTime.getMinutes()/60.0))-(28*(bedTime.getMinutes()/60.0))));
-    			    	GridPane.setValignment(goalSleepButton, VPos.TOP);
-    			    	GridPane.setHalignment(goalSleepButton, HPos.LEFT);
-    			    	goalSleepButton.setMinWidth(90);
-    			    	
-    			    	if (sleepPeriod.getType().equals("Main Sleep")) {
-    			    		goalSleepButton.setStyle("-fx-background-color: #0080FF;");
-    			    	} else if (sleepPeriod.getType().equals("Nap")) {
-    			    		goalSleepButton.setStyle("-fx-background-color: #00FFBB;");
-    			    	}
-    			    	System.out.println("wahahaha");
-    			    	gridPane.add(goalSleepButton, selectedWeek.getDaysOfWeek().indexOf(i)+1, bedRowIndex);
+    					generateButton(sleepPeriod, false, selectedWeek.getDaysOfWeek().indexOf(i)+1);
     				}
     			}
     		}
+    	}
+    	
+    	for (int x = matchingDayFlag; x < 8; x++) {
+			generateButton(new Sleep("recommended", user.getGoalBedTime(), user.getGoalAwakeTime(), "neutral"), true, x);
     	}
     }
     
@@ -309,6 +278,7 @@ public class ScheduleController extends MainMenuViewController implements Initia
     			node.setOpacity(0);
     		}
     	}
+    	generateSchedule();
     	// Code for fixing blur in about text area
     	aboutTextArea.setCache(false);
 		ScrollPane sp = (ScrollPane) aboutTextArea.getChildrenUnmodifiable().get(0);
