@@ -31,7 +31,7 @@ public class Day {
 		
 		totalSleep = new Time(totalHours, totalMinutes);
 	}
-	
+
 	
 	public LocalDate getDate() {
 		return date;
@@ -64,6 +64,8 @@ public class Day {
 	public void setSleepDebt(Time sleepDebt) {
 		this.sleepDebt = sleepDebt;
 	}
+
+
 
 
 

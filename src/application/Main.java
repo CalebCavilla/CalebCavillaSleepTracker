@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 public class Main extends Application {
 	Scene mainMenuView;
 	Stage applicationStage;
-	User user = new User();
+	static User user = new User();
 	@Override
 	public void start(Stage primaryStage) {
 		try {

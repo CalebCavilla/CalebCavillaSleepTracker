@@ -12,75 +12,133 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class DashboardController extends MainMenuViewController implements Initializable{
 
-	@FXML
-    private VBox sleepVBox;
-	
-    @FXML
-    private HBox chartHBox;
+	 @FXML
+	    private Label awakeTimeLabel;
 
-    @FXML
-    private VBox doughnutVBox;
+	    @FXML
+	    private Label bedTimeLabel;
 
-    @FXML
-    private Label goalLabel;
+	    @FXML
+	    private HBox chartHBox;
 
-    @FXML
-    private ImageView goalSymbol;
+	    @FXML
+	    private DatePicker datePicker;
 
-    @FXML
-    private Label hoursSleptLabel;
+	    @FXML
+	    private Label deepSleepLabel;
 
-    @FXML
-    private ImageView hoursSleptSymbol;
+	    @FXML
+	    private VBox detailsVBox;
 
-    @FXML
-    private Label sleepDebtLabel;
+	    @FXML
+	    private VBox detailsVBox1;
 
-    @FXML
-    private ImageView sleepDebtSymbol;
+	    @FXML
+	    private VBox doughnutVBox;
 
+	    @FXML
+	    private Label durationLabel;
+
+	    @FXML
+	    private Label goalLabel;
+
+	    @FXML
+	    private ImageView goalSymbol;
+
+	    @FXML
+	    private GridPane gridPane;
+
+	    @FXML
+	    private Label hoursSleptLabel;
+
+	    @FXML
+	    private ImageView hoursSleptSymbol;
+
+	    @FXML
+	    private Label lightSleepLabel;
+
+	    @FXML
+	    private LineChart<?, ?> lineChart;
+
+	    @FXML
+	    private Label qualityLabel;
+
+	    @FXML
+	    private Label sleepDebtLabel;
+
+	    @FXML
+	    private ImageView sleepDebtSymbol;
+
+	    @FXML
+	    private VBox sleepVBox;
+
+	    @FXML
+	    private CategoryAxis xAxis;
+
+	    @FXML
+	    private NumberAxis yAxis;
+
+    LocalDate selectedDate = LocalDate.now();
+    
     @FXML
     void switchMainMenuView(ActionEvent event) {
     	applicationStage.setScene(mainMenuView);
     	applicationStage.setTitle("Main Menu");
     }
+    
+    @FXML
+    void dateUpdater(ActionEvent event) {
+    	update();
+    }
+    
 
+    
     private ObservableList<PieChart.Data> createData(Time sleep, Time debt) {
         return FXCollections.observableArrayList(
                 new PieChart.Data("Sleep", sleep.getHours()*60 + sleep.getMinutes()),
                 new PieChart.Data("Debt", debt.getHours()*60 + debt.getMinutes()));
     }
     
-    public void update() {
-    	
+    public void doughnutChartSetup() {
+    	doughnutVBox.getChildren().clear();
     	ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("No sleep/goal set for today", 1));
     	
 		String goal = "no goal set for today";
 		String sleep = "no sleep set for today";
-		String debt = "no sleep/goal set for toaday";
+		String debt = "no sleep set for toaday";
 		
 		if (user.getGoalTotalSleep() != null) {
 			goal = "Goal: " + user.getGoalTotalSleep().printDifferenceFormat();
-		}
-		
-		for (Day i : user.getDiary()) {
-			if (i.getDate().equals(LocalDate.now())) {
-				pieChartData = createData(i.getTotalSleep(), i.getSleepDebt());
-				sleep = "Sleep: " + i.getTotalSleep().printDifferenceFormat();
-				debt = "Sleep Debt: " + i.getSleepDebt().printDifferenceFormat();
+			pieChartData = FXCollections.observableArrayList(
+	                new PieChart.Data("Sleep Debt", 1));
+			
+			for (Day i : user.getDiary()) {
+				if (i.getDate().equals(selectedDate)) {
+					pieChartData = createData(i.getTotalSleep(), i.getSleepDebt());
+					sleep = "Sleep: " + i.getTotalSleep().printDifferenceFormat();
+					debt = "Sleep Debt: " + i.getSleepDebt().printDifferenceFormat();
+				}
 			}
 		}
+		
 		
 		goalLabel.setText(goal);
 		hoursSleptLabel.setText(sleep);
@@ -91,19 +149,89 @@ public class DashboardController extends MainMenuViewController implements Initi
         if (pieChartData.size() > 1){
         	 pieChartData.get(0).getNode().setStyle("-fx-pie-color: #0080ff");
              pieChartData.get(1).getNode().setStyle("-fx-pie-color: orange");
-        }else {
-        	pieChartData.get(0).getNode().setStyle("-fx-pie-color: grey");
+        } else {
+        	if (user.getGoalTotalSleep() != null) {
+        		pieChartData.get(0).getNode().setStyle("-fx-pie-color: orange");
+        	}else {
+        		pieChartData.get(0).getNode().setStyle("-fx-pie-color: grey");
+        	}
+        	
         }
         doughnutVBox.getChildren().add(chart);
+    }
+    
+    public void detailSetup() {
+    	qualityLabel.setText("Please set Goals and Main Sleep");
+    	deepSleepLabel.setText("Please set Goals and Diary");
+    	lightSleepLabel.setText("Please set Goals and Diary");
+    	bedTimeLabel.setText("Please set Goals and Main Sleep");
+    	awakeTimeLabel.setText("Please set Goals and Main Sleep");
+    	durationLabel.setText("Please set Goals and Main Sleep");
+    	
+    	if (user.getGoalTotalSleep() != null) {
+    		for (Day i : user.getDiary()) {
+        		if (i.getDate().equals(selectedDate)) {
+        			
+        			
+        			// deep and light sleep
+        			int deepSleepHours = (int) ((i.getTotalSleep().getHours()*60 + i.getTotalSleep().getMinutes()) * 0.33) / 60;
+        			int deepSleepMinutes = (int) ((i.getTotalSleep().getHours()*60 + i.getTotalSleep().getMinutes()) * 0.33) % 60;
+        			Time deepSleep = new Time(deepSleepHours, deepSleepMinutes, "am");
+        			Time totalSleep = new Time(i.getTotalSleep().getHours(), i.getTotalSleep().getMinutes(), "am");
+        			
+        			deepSleepLabel.setText(deepSleep.printDifferenceFormat());
+        	    	lightSleepLabel.setText(deepSleep.difference(totalSleep).printDifferenceFormat());
+        	    	
+        	    	// bed, awake, quality, and duration
+        	    	for (Sleep j : i.getSleepPeriods()) {
+        	    		if (j.getType().equals("Main Sleep")){
+        	    			bedTimeLabel.setText(j.getStartTime().printTimeFormat(true));
+        	    			awakeTimeLabel.setText(j.getEndTime().printTimeFormat(true));
+        	    			qualityLabel.setText(j.getQuality() + "%");
+        	    			durationLabel.setText(j.getDuration().printDifferenceFormat());
+        	    		}
+        	    	}
+        		}
+        	}
+    	}
+    }
+    
+    public void update() {
+    	selectedDate = datePicker.getValue();
+    	doughnutChartSetup();
+    	detailSetup();
     }
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
         
         // other
-        sleepVBox.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-color: #ffffff");
+		datePicker.setValue(LocalDate.now());
+        chartHBox.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-color: #ffffff");
+        gridPane.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-color: #ffffff");
+        gridPane.setPadding(new Insets(10,10,10,10));
+        for (Node node : gridPane.getChildren()) {
+        	if (node instanceof VBox) {
+        		node.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-color: #ffffff");
+        		GridPane.setMargin(node, new Insets(10,10,10,10));
+        	}
+        }
+        
+        // lineChart
+        XYChart.Series series = new XYChart.Series<>();
+        
+        series.getData().add(new XYChart.Data("1", 23));
+        series.getData().add(new XYChart.Data("2", 23));
+        series.getData().add(new XYChart.Data("3", 13));
+        series.getData().add(new XYChart.Data("4", 53));
+        series.getData().add(new XYChart.Data("5", 83));
+        series.getData().add(new XYChart.Data("6", 73));
+        
+        lineChart.getData().addAll(series);
         
         
+        
+        // symbols
 		try {
 			
 			// GOAL

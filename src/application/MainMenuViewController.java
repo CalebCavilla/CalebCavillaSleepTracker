@@ -57,7 +57,7 @@ public class MainMenuViewController extends Main {
 			dashboardController.update();
 			
 			// create the scene
-			dashboardView = new Scene(dashboardRoot,550,400);
+			dashboardView = new Scene(dashboardRoot,700,700);
 			applicationStage.setScene(dashboardView);
 			applicationStage.show();
 		} catch (IOException e) {

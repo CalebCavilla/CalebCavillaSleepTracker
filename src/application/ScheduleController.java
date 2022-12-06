@@ -79,24 +79,7 @@ public class ScheduleController extends MainMenuViewController implements Initia
     private Label saturdayLabel;
     
     void calculateWeek() {
-    	String dayOfWeek = scheduleDatePicker.getValue().getDayOfWeek().name();
-    	LocalDate startOfWeek = null;
-    	if (dayOfWeek.equals("SUNDAY")) {
-    		startOfWeek = selectedDate.minusDays(0);
-    	} else if (dayOfWeek.equals("MONDAY")){
-    		startOfWeek = selectedDate.minusDays(1);
-    	} else if (dayOfWeek.equals("TUESDAY")){
-    		startOfWeek = selectedDate.minusDays(2);
-    	} else if (dayOfWeek.equals("WEDNESDAY")){
-    		startOfWeek = selectedDate.minusDays(3);
-    	} else if (dayOfWeek.equals("THURSDAY")){
-    		startOfWeek = selectedDate.minusDays(4);
-    	} else if (dayOfWeek.equals("FRIDAY")){
-    		startOfWeek = selectedDate.minusDays(5);
-    	} else if (dayOfWeek.equals("SATURDAY")){
-    		startOfWeek = selectedDate.minusDays(6);
-    	}
-    	selectedWeek = new Week(startOfWeek);
+    	selectedWeek = new Week(scheduleDatePicker.getValue());
     }
     
     @FXML

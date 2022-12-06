@@ -7,6 +7,7 @@ public class Sleep {
 	private Time endTime;
 	private Time duration;
 	private String mood;
+	private int quality;
 	
 	public Sleep(String type, Time startTime, Time endTime, String mood) {
 		this.type = type;
@@ -14,6 +15,7 @@ public class Sleep {
 		this.endTime = endTime;
 		this.duration = startTime.difference(endTime);
 		this.mood = mood;
+		this.setQuality(new Quality(duration).getQuality());
 	}
 	
 	public Time getStartTime() {
@@ -55,5 +57,14 @@ public class Sleep {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public int getQuality() {
+		return quality;
+	}
+
+	public void setQuality(int quality) {
+		this.quality = quality;
+	}
+
 
 }

@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="282.0" prefWidth="342.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
+<VBox prefHeight="633.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -23,26 +30,38 @@
                   <Font size="30.0" />
                </font>
                <HBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="25.0" />
                </HBox.margin>
             </Label>
+            <DatePicker fx:id="datePicker" onAction="#dateUpdater">
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </DatePicker>
          </children>
       </HBox>
-      <VBox fx:id="sleepVBox" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="sleepVBox" prefHeight="235.0" prefWidth="322.0">
          <children>
             <Label text="Sleep" textFill="#09599a">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Label>
-            <Label text="Sleep debt = Goal - Sleep" textFill="#5e5e5e" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin></Label>
+            <Label text="Sleep debt = Goal - Sleep" textFill="#5e5e5e">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
             <Separator opacity="0.31" prefWidth="200.0">
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="10.0" top="5.0" />
                </VBox.margin>
             </Separator>
-            <HBox fx:id="chartHBox" alignment="CENTER_LEFT" prefHeight="126.0" prefWidth="322.0">
+            <HBox fx:id="chartHBox" alignment="CENTER" prefHeight="179.0" prefWidth="322.0">
                <children>
-                  <VBox fx:id="doughnutVBox" prefHeight="126.0" prefWidth="282.0" />
+                  <VBox fx:id="doughnutVBox" prefHeight="179.0" prefWidth="441.0" />
                   <VBox prefHeight="100.0" prefWidth="227.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -80,6 +99,131 @@
          <VBox.margin>
             <Insets left="10.0" right="10.0" />
          </VBox.margin>
+      </VBox>
+      <VBox fx:id="detailsVBox" prefHeight="277.0" prefWidth="372.0">
+         <children>
+            <Label text="Details" textFill="#09599a">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Separator>
+            <GridPane fx:id="gridPane" alignment="BOTTOM_RIGHT" prefHeight="243.0" prefWidth="376.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="deepSleepLabel" text="Label">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label opacity="0.75" text="Deep sleep" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                     <children>
+                        <Label fx:id="bedTimeLabel" text="Label">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label opacity="0.75" text="Bed Time" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="awakeTimeLabel" text="Label">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label opacity="0.75" text="Wake Time" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label fx:id="lightSleepLabel" text="Label">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label opacity="0.75" text="Light Sleep" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="97.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Label fx:id="durationLabel" text="Label">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label opacity="0.75" text="Duration" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="qualityLabel" text="Label">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label opacity="0.75" text="Quality" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+               </children>
+            </GridPane>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox fx:id="detailsVBox1" prefHeight="277.0" prefWidth="372.0">
+         <children>
+            <Label text="Weekly Statistics" textFill="#09599a">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Separator>
+            <LineChart fx:id="lineChart">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT" />
+              </yAxis>
+            </LineChart>
+         </children>
       </VBox>
    </children>
 </VBox>
