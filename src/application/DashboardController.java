@@ -96,6 +96,7 @@ public class DashboardController extends MainMenuViewController implements Initi
 	    private NumberAxis yAxis;
 
     LocalDate selectedDate = LocalDate.now();
+    Week selectedWeek = new Week(LocalDate.now());
     
     @FXML
     void switchMainMenuView(ActionEvent event) {
@@ -196,10 +197,29 @@ public class DashboardController extends MainMenuViewController implements Initi
     	}
     }
     
+    
+
+	public void lineChartSetup() {
+    	// lineChart
+    	lineChart.getData().clear();
+    	lineChart.setAnimated(false);
+        XYChart.Series series = new XYChart.Series();
+        for (Day i : selectedWeek.getDaysOfWeek()) {
+        	for (Day j : user.getDiary()) {
+        		if (i.getDate().equals(j.getDate())){
+        			series.getData().add(new XYChart.Data(i.getDate().getDayOfWeek().name(), j.getTotalSleep().getHours()));
+        		}
+        	}
+        }
+        lineChart.getData().addAll(series);
+    }
+    
     public void update() {
     	selectedDate = datePicker.getValue();
+    	selectedWeek = new Week(selectedDate);
     	doughnutChartSetup();
     	detailSetup();
+    	lineChartSetup();
     }
     
 	@Override
@@ -217,17 +237,6 @@ public class DashboardController extends MainMenuViewController implements Initi
         	}
         }
         
-        // lineChart
-        XYChart.Series series = new XYChart.Series<>();
-        
-        series.getData().add(new XYChart.Data("1", 23));
-        series.getData().add(new XYChart.Data("2", 23));
-        series.getData().add(new XYChart.Data("3", 13));
-        series.getData().add(new XYChart.Data("4", 53));
-        series.getData().add(new XYChart.Data("5", 83));
-        series.getData().add(new XYChart.Data("6", 73));
-        
-        lineChart.getData().addAll(series);
         
         
         

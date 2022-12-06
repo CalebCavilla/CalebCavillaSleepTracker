@@ -10,7 +10,7 @@ public class Week {
 	private Time totalSleepDebt;
 
 	public Week(LocalDate date) {
-		calculateStartOfWeek(date);
+		date = calculateStartOfWeek(date);
 		this.daysOfWeek.add(new Day(date));
 		for (int i = 1; i < 7; i++) {
 			daysOfWeek.add(new Day(date.plusDays(i)));
