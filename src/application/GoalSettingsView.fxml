@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="151.0" prefWidth="233.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GoalSettingsController">
+<VBox fx:id="goalsVBox" prefHeight="204.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GoalSettingsController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="233.0">
          <children>
@@ -26,7 +29,7 @@
             <Insets right="10.0" />
          </opaqueInsets>
          <VBox.margin>
-            <Insets />
+            <Insets bottom="10.0" />
          </VBox.margin>
       </HBox>
       <Separator prefWidth="200.0" />
@@ -37,28 +40,85 @@
                   <Insets left="10.0" />
                </HBox.margin>
 		    </Label>
-            <TextField fx:id="targetBedTimeText">
-            	<HBox.margin>
-                  <Insets left="10.0" />
+            <ComboBox fx:id="bedTimeHours" prefHeight="25.0" prefWidth="80.0">
+            	<items>
+           			<FXCollections fx:factory="observableArrayList">
+            			<String fx:value="1" />
+            			<String fx:value="2" />
+            			<String fx:value="3" />
+            			<String fx:value="4" />
+            			<String fx:value="6" />
+            			<String fx:value="7" />
+            			<String fx:value="8" />
+            			<String fx:value="9" />
+            			<String fx:value="10" />
+            			<String fx:value="11" />
+            			<String fx:value="12" />
+            		</FXCollections>
+            	</items>
+            </ComboBox>
+            <Label text=":">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin></Label>
+            <ComboBox fx:id="bedTimeMinutes" prefHeight="25.0" prefWidth="70.0" />
+            <ChoiceBox fx:id="bedTimePeriod" prefHeight="25.0" prefWidth="50.0">
+            	<items>
+           			<FXCollections fx:factory="observableArrayList">
+            			<String fx:value="am" />
+            			<String fx:value="pm" />
+            		</FXCollections>
+            	</items>
+               <HBox.margin>
+                  <Insets left="5.0" />
                </HBox.margin>
-            </TextField>
+           </ChoiceBox>
          </children>
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="50.0" prefWidth="200.0">
+      <HBox prefHeight="50.0" prefWidth="233.0">
          <children>
-            <Label text="Wakeup time:">
-            	<HBox.margin>
+            <Label text="Awake Time: ">
+               <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="targetAwakeTimeText">	
-            	<HBox.margin>
-                  <Insets left="10.0" />
+            <ComboBox fx:id="awakeTimeHours" prefHeight="25.0" prefWidth="80.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="1" />
+                     <String fx:value="2" />
+                     <String fx:value="3" />
+                     <String fx:value="4" />
+                     <String fx:value="6" />
+                     <String fx:value="7" />
+                     <String fx:value="8" />
+                     <String fx:value="9" />
+                     <String fx:value="10" />
+                     <String fx:value="11" />
+                     <String fx:value="12" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label text=":">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
                </HBox.margin>
-            </TextField>
+            </Label>
+            <ComboBox fx:id="awakeTimeMinutes" prefHeight="25.0" prefWidth="70.0" />
+            <ChoiceBox fx:id="awakeTimePeriod" prefHeight="25.0" prefWidth="50.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="am" />
+                     <String fx:value="pm" />
+                  </FXCollections>
+               </items>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </ChoiceBox>
          </children>
       </HBox>
       <HBox prefHeight="50.0" prefWidth="200.0">
@@ -80,10 +140,15 @@
             </Label>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#setGoals" text="Set Goals!">
-      		<VBox.margin>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#setGoals" text="Set Goals!" />
+            <Label fx:id="errorLabel" text="Error Label" textFill="RED">
+               <HBox.margin>
                   <Insets left="10.0" />
-            </VBox.margin>
-      </Button>
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </VBox>

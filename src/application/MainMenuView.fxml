@@ -9,7 +9,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0">
          <children>
-            <Button fx:id="dashBoardButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="80.0" text="Dashboard">
+            <Button fx:id="dashBoardButton" mnemonicParsing="false" onAction="#switchDashboardView" prefHeight="70.0" prefWidth="80.0" text="Dashboard">
             	<HBox.margin>
 		        	<Insets left="10.0" />
 		        </HBox.margin>

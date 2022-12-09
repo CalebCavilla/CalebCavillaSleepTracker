@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 
+/**
+ * PersonalSettingsController is a standard controller class responsible for controlling the functionality of the 
+ * PersonalSettings scene. 
+*/
 public class PersonalSettingsController extends SettingsController implements Initializable {;
 	
 
@@ -29,31 +33,46 @@ public class PersonalSettingsController extends SettingsController implements In
     @FXML
     private Spinner<Integer> weightSpinner;
 
-    
+    /**
+	* switches scene to settings.
+	* @param event the event thrown when 'back' button is pressed
+	*/
     @FXML
     void switchSettingsView(ActionEvent event) {
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
     }
+    
+    /**
+	* confirms the personal information provided by the user and sets the variables in their user profile.
+	* @param event the event thrown when 'set goals!' button is pressed
+	*/
     @FXML
     void confirmPersonalInformation(ActionEvent event) {
     	
+    	// set user variables
     	user.setGender(genderChoice.getValue());
     	user.setAge(ageSpinner.getValue());
     	user.setWeight(weightSpinner.getValue());
     	user.setHeight(heightSpinner.getValue());
     	
     
-    	
+    	// switch scene back to settings
     	applicationStage.setScene(settingsView);
     	applicationStage.setTitle("Settings");
     	
-    	System.out.println(user.getAge() + user.getGender() + user.getWeight() + user.getHeight());
     }
     
+    /**
+   	* constructs the scene/GUI to be displayed to the user
+   	*/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		// default value for the gender choice box
+		genderChoice.setValue(genderChoice.getItems().get(2));
+		
+		// Spinner code was created with help from: https://www.youtube.com/watch?v=hSTEVJe4HSE
 		
 		// Age spinner setup
 		SpinnerValueFactory<Integer> ageValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 125, 18);
