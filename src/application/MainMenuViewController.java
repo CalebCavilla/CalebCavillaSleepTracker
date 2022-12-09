@@ -22,7 +22,10 @@ import javafx.application.Application;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * MainMenuController is a standard controller class responsible for controlling the functionality of the 
+ * ManMenuView scene. 
+*/
 public class MainMenuViewController extends Main {
 	
 	Scene settingsView;
@@ -42,9 +45,14 @@ public class MainMenuViewController extends Main {
     @FXML
     private Button settingsButton;
 
+    /**
+     * creates the dash board controller and scene and switches to it
+     * @param event the event thrown when 'dashboard' button is pressed
+    */
     @FXML
     void switchDashboardView(ActionEvent event) {
     	try {
+    		// initialize the controller
 			FXMLLoader loader = new FXMLLoader();
 			VBox dashboardRoot = loader.load(new FileInputStream("src/application/DashboardView.fxml"));
 			DashboardController dashboardController = (DashboardController) loader.getController();
@@ -65,10 +73,14 @@ public class MainMenuViewController extends Main {
 			e.printStackTrace();
 		}
     }
-
+    /**
+     * creates the diary controller and scene and switches to it
+     * @param event the event thrown when 'diary' button is pressed
+    */
     @FXML
     void switchDiaryView(ActionEvent event) {
     	try {
+    		// initialize the controller
 			FXMLLoader loader = new FXMLLoader();
 			VBox diaryRoot = loader.load(new FileInputStream("src/application/DiaryView.fxml"));
 			DiaryController diaryController = (DiaryController) loader.getController();
@@ -90,17 +102,21 @@ public class MainMenuViewController extends Main {
 		}
     }
 
-    
+    /**
+     * creates the schedule controller and scene and switches to it
+     * @param event the event thrown when 'schedule' button is pressed
+    */
     @FXML
     void switchScheduleView(ActionEvent event) {
     	try {
+    		// initialize the controller
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane scheduleRoot = loader.load(new FileInputStream("src/application/ScheduleView.fxml"));
 			ScheduleController scheduleController = (ScheduleController) loader.getController();
 			scheduleController.applicationStage = applicationStage;
 			scheduleView = new Scene(scheduleRoot,1100,750);
 			
-			
+			// set instance variables / create the scene
 			scheduleController.settingsView = settingsView;
 			scheduleController.mainMenuView = mainMenuView;
 			scheduleController.user = user;
@@ -113,14 +129,19 @@ public class MainMenuViewController extends Main {
 			e.printStackTrace();
 		}
     }	
-
+    /**
+     * creates the settings controller and scene and switches to it
+     * @param event the event thrown when 'settings' button is pressed
+    */
     @FXML
     void switchSettingsView(ActionEvent event) {
 		try {
-			System.out.println(user);
+			// Initializes the controller
 			FXMLLoader loader = new FXMLLoader();
 			VBox settingsRoot = loader.load(new FileInputStream("src/application/SettingsView.fxml"));
 			SettingsController settingsController = (SettingsController) loader.getController();
+			
+			// set instance variables and create the scene
 			settingsController.applicationStage = applicationStage;
 			settingsView = new Scene(settingsRoot,250,250);
 			settingsController.settingsView = settingsView;

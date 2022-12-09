@@ -8,21 +8,33 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * NOT MY CODE: USED IN THE CREATION OF THE DOUGHNUT CHART IN THE DASHBOARD 
+ * LINK TO ORIGINAL AUTHOR: https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut
+*/
 public class DoughnutChart extends PieChart {
      Circle innerCircle;
 
+     /**
+     * Constructs a pie chart with a inner circle drawing in the middle to create the illusion of a doughnut chart
+     * @param pieData an observable list of data used to construct the slices of the pie chart.
+     */
     public DoughnutChart(ObservableList<Data> pieData) {
         super(pieData);
 
         innerCircle = new Circle();
-
-        // just styled in code for demo purposes,
-        // use a style class instead to style via css.
         innerCircle.setFill(Color.WHITESMOKE);
         innerCircle.setStroke(Color.WHITE);
         innerCircle.setStrokeWidth(3);
     }
 
+    /**
+    * Determines where the pie chart will be drawn in its container
+    * @param top the top of the container
+    * @param left the left of the container
+    * @param contentWidth the width of the container
+    * @param contentHeight the height of the container
+    */
     @Override
     protected void layoutChartChildren(double top, double left, double contentWidth, double contentHeight) {
         super.layoutChartChildren(top, left, contentWidth, contentHeight);
@@ -31,6 +43,9 @@ public class DoughnutChart extends PieChart {
         updateInnerCircleLayout();
     }
 
+    /**
+    * Checks if the pie chart has a inner circle, if it does not, it adds the inner circle to the chart
+    */
     private void addInnerCircleIfNotPresent() {
         if (getData().size() > 0) {
             Node pie = getData().get(0).getNode();
@@ -44,6 +59,9 @@ public class DoughnutChart extends PieChart {
         }
     }
 
+    /**
+    * Adjusts the inner circle so that it is centered and the proper size for the pie chart
+    */
     private void updateInnerCircleLayout() {
         double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE;
         double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;

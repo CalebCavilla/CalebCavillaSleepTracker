@@ -26,10 +26,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
+/**
+ * DashboardController is a standard controller class responsible for controlling the functionality of the 
+ * Dashboard scene. 
+*/
 public class DashboardController extends MainMenuViewController implements Initializable{
 
-	 @FXML
+		@FXML
 	    private Label awakeTimeLabel;
 
 	    @FXML
@@ -95,29 +98,50 @@ public class DashboardController extends MainMenuViewController implements Initi
 	    @FXML
 	    private NumberAxis yAxis;
 
-    LocalDate selectedDate = LocalDate.now();
-    Week selectedWeek = new Week(LocalDate.now());
+    private LocalDate selectedDate = LocalDate.now();
+    private Week selectedWeek = new Week(LocalDate.now());
     
+    /**
+	* switches scene to mainMenuView.
+	* @param event the event thrown when 'confirm sleep' button is pressed
+	*/
     @FXML
     void switchMainMenuView(ActionEvent event) {
     	applicationStage.setScene(mainMenuView);
     	applicationStage.setTitle("Main Menu");
     }
     
+    /**
+	* Calls update method. Must use middle man method as update() is not an FXML tagged method 
+	* so it will not communicate with the FXML file 
+	* @param event the event thrown when 'confirm sleep' button is pressed
+	*/
     @FXML
     void dateUpdater(ActionEvent event) {
     	update();
     }
     
 
-    
+    /**
+	* creates data to be used in a sleep vs. debt pie chart.
+	* @param sleep the time representing the total sleep time to be graphed
+	* @param debt the time representing the sleep debt to be graphed
+	* @return the obeservableList of pie chart data to be used in displaying a sleep vs. debt pie chart
+	*/
     private ObservableList<PieChart.Data> createData(Time sleep, Time debt) {
         return FXCollections.observableArrayList(
                 new PieChart.Data("Sleep", sleep.getHours()*60 + sleep.getMinutes()),
                 new PieChart.Data("Debt", debt.getHours()*60 + debt.getMinutes()));
     }
     
+    /**
+   	* creates, constructs, and displays the doughnutChart of sleep vs. Debt
+   	* and the corresponding legend and labels
+   	*/
     public void doughnutChartSetup() {
+
+    	// clear the doughnut chart for a clean slate to work from
+    	// set default values for the chart if no goals/diary was entered
     	doughnutVBox.getChildren().clear();
     	ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("No sleep/goal set for today", 1));
@@ -126,6 +150,7 @@ public class DashboardController extends MainMenuViewController implements Initi
 		String sleep = "no sleep set for today";
 		String debt = "no sleep set for toaday";
 		
+		// if the user entered a goal, create the pie chart data and set the variables for the legend
 		if (user.getGoalTotalSleep() != null) {
 			goal = "Goal: " + user.getGoalTotalSleep().printDifferenceFormat();
 			pieChartData = FXCollections.observableArrayList(
@@ -140,13 +165,15 @@ public class DashboardController extends MainMenuViewController implements Initi
 			}
 		}
 		
-		
+		// create the legend and the doughnut chart
 		goalLabel.setText(goal);
 		hoursSleptLabel.setText(sleep);
 		sleepDebtLabel.setText(debt);
-		
         final DoughnutChart chart = new DoughnutChart(pieChartData);
         chart.setLabelsVisible(true);
+        
+        // set colors for doughnut chart based on if user has entered a goal or not
+        // created with help from: https://stackoverflow.com/questions/15219334/javafx-change-piechart-color
         if (pieChartData.size() > 1){
         	 pieChartData.get(0).getNode().setStyle("-fx-pie-color: #0080ff");
              pieChartData.get(1).getNode().setStyle("-fx-pie-color: orange");
@@ -158,10 +185,16 @@ public class DashboardController extends MainMenuViewController implements Initi
         	}
         	
         }
+        // add the chart to the scene
         doughnutVBox.getChildren().add(chart);
     }
     
+    /**
+   	* creates, constructs, and displays the details section 
+   	*/
     public void detailSetup() {
+    	
+    	// default values for the labels
     	qualityLabel.setText("Please set Goals and Main Sleep");
     	deepSleepLabel.setText("Please set Goals and Diary");
     	lightSleepLabel.setText("Please set Goals and Diary");
@@ -169,6 +202,8 @@ public class DashboardController extends MainMenuViewController implements Initi
     	awakeTimeLabel.setText("Please set Goals and Main Sleep");
     	durationLabel.setText("Please set Goals and Main Sleep");
     	
+    	
+    	// if a user has set a goal, for search the diary for a day that matches the selectedDate and display the details for that day for that day
     	if (user.getGoalTotalSleep() != null) {
     		for (Day i : user.getDiary()) {
         		if (i.getDate().equals(selectedDate)) {
@@ -198,7 +233,9 @@ public class DashboardController extends MainMenuViewController implements Initi
     }
     
     
-
+    /**
+   	* creates, constructs, and displays the line chart of sleep throughout the selected week
+   	*/
 	public void lineChartSetup() {
     	// lineChart
     	lineChart.getData().clear();
@@ -214,6 +251,10 @@ public class DashboardController extends MainMenuViewController implements Initi
         lineChart.getData().addAll(series);
     }
     
+	/**
+   	* refreshes the scene by calling all the setup methods and updates the controller
+   	* with new values for selectedDate and selectedWeek
+   	*/
     public void update() {
     	selectedDate = datePicker.getValue();
     	selectedWeek = new Week(selectedDate);
@@ -221,11 +262,14 @@ public class DashboardController extends MainMenuViewController implements Initi
     	detailSetup();
     	lineChartSetup();
     }
-    
+    /**
+   	* constructs the scene/GUI to be displayed to the user for the first time
+   	*/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
         
-        // other
+        // set visual style for various nodes
+		// created with help from: https://stackoverflow.com/questions/16564818/top-left-and-right-corner-rounded-in-javafx-css
 		datePicker.setValue(LocalDate.now());
         chartHBox.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-color: #ffffff");
         gridPane.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-color: #ffffff");
@@ -240,7 +284,7 @@ public class DashboardController extends MainMenuViewController implements Initi
         
         
         
-        // symbols
+        // symbols creation
 		try {
 			
 			// GOAL
